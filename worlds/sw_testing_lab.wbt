@@ -1,0 +1,277 @@
+#VRML_SIM R2025a utf8
+
+# SJSU Software Testing Lab - e-puck navigation test bench.
+#
+# The world is intentionally static: every object that any scenario needs
+# already exists at load time.  The Supervisor (test oracle) only MOVES and
+# RESIZES those objects between test runs.  Nothing is ever spawned, which is
+# the pattern recommended for webots.cloud.
+#
+# DEF names used by controllers/test_supervisor/test_supervisor.py:
+#   EPUCK        the robot under test
+#   GOAL_MARKER  visual-only disc showing the target position
+#   OBS0..OBS5   0.15 m diameter cylinders, parked below the floor when unused
+#   WALL_A/WALL_B  corridor barrier halves (resized via WALL_A_BOX/WALL_B_BOX)
+
+EXTERNPROTO "webots://projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "webots://projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "webots://projects/objects/floors/protos/RectangleArena.proto"
+EXTERNPROTO "webots://projects/robots/gctronic/e-puck/protos/E-puck.proto"
+
+WorldInfo {
+  info [
+    "SJSU software testing lab: e-puck point-to-point navigation under test."
+  ]
+  title "Software Testing Lab - e-puck Navigation"
+  basicTimeStep 16
+  randomSeed 1
+  FPS 30
+  contactProperties [
+    ContactProperties {
+      material1 "default"
+      material2 "default"
+      coulombFriction [
+        0.8
+      ]
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.09 0.09 0.99 1.62
+  position 0.05 -0.25 3.6
+  followSmoothness 0
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+RectangleArena {
+  floorSize 2 2
+  floorTileSize 0.25 0.25
+  wallThickness 0.02
+  wallHeight 0.12
+}
+DEF GOAL_MARKER Pose {
+  translation 0.8 0.8 0.001
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.1 0.8 0.2
+        roughness 1
+        metalness 0
+        transparency 0.35
+      }
+      geometry Cylinder {
+        height 0.002
+        radius 0.1
+        subdivision 32
+      }
+    }
+  ]
+}
+DEF OBS0 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS0_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle0"
+  boundingObject USE OBS0_GEO
+}
+DEF OBS1 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS1_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle1"
+  boundingObject USE OBS1_GEO
+}
+DEF OBS2 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS2_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle2"
+  boundingObject USE OBS2_GEO
+}
+DEF OBS3 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS3_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle3"
+  boundingObject USE OBS3_GEO
+}
+DEF OBS4 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS4_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle4"
+  boundingObject USE OBS4_GEO
+}
+DEF OBS5 Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.85 0.35 0.1
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF OBS5_GEO Cylinder {
+        height 0.15
+        radius 0.075
+        subdivision 24
+      }
+    }
+  ]
+  name "obstacle5"
+  boundingObject USE OBS5_GEO
+}
+DEF WALL_A Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.25 0.35 0.7
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF WALL_A_BOX Box {
+        size 0.05 0.6 0.15
+      }
+    }
+  ]
+  name "wallA"
+  boundingObject DEF WALL_A_BB Box {
+    size 0.05 0.6 0.15
+  }
+}
+DEF WALL_B Solid {
+  translation 0 0 -5
+  children [
+    Shape {
+      appearance PBRAppearance {
+        baseColor 0.25 0.35 0.7
+        roughness 0.9
+        metalness 0
+      }
+      geometry DEF WALL_B_BOX Box {
+        size 0.05 0.6 0.15
+      }
+    }
+  ]
+  name "wallB"
+  boundingObject DEF WALL_B_BB Box {
+    size 0.05 0.6 0.15
+  }
+}
+DEF EPUCK E-puck {
+  translation -0.8 -0.8 0
+  rotation 0 0 1 0.785398
+  name "epuck"
+  controller "epuck_navigator"
+  window "<none>"
+  turretSlot [
+    GPS {
+      name "gps"
+    }
+    InertialUnit {
+      name "imu"
+    }
+    DEF TOF_L DistanceSensor {
+      translation 0.04 0 0
+      rotation 0 0 1 0.436332
+      name "tof_left"
+      lookupTable [
+        0 0 0
+        0.5 500 0
+      ]
+      type "generic"
+      aperture 0.05
+    }
+    DEF TOF_C DistanceSensor {
+      translation 0.04 0 0
+      rotation 0 0 1 0
+      name "tof_centre"
+      lookupTable [
+        0 0 0
+        0.5 500 0
+      ]
+      type "generic"
+      aperture 0.05
+    }
+    DEF TOF_R DistanceSensor {
+      translation 0.04 0 0
+      rotation 0 0 1 -0.436332
+      name "tof_right"
+      lookupTable [
+        0 0 0
+        0.5 500 0
+      ]
+      type "generic"
+      aperture 0.05
+    }
+  ]
+}
+DEF SUPERVISOR Robot {
+  name "test_supervisor"
+  controller "test_supervisor"
+  window "test_lab"
+  supervisor TRUE
+}

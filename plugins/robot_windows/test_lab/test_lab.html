@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Software Testing Lab</title>
+<link rel="icon" type="image/png" href="https://cyberbotics.com/assets/images/webots.png">
+<link rel="stylesheet" href="test_lab.css">
+<script type="module">
+  import RobotWindow from 'https://cyberbotics.com/wwi/R2025a/RobotWindow.js';
+  window.robotWindow = new RobotWindow();
+</script>
+<script src="test_lab.js" defer></script>
+</head>
+<body>
+
+<header class="bar">
+  <div>
+    <h1>Software Testing Lab &mdash; e-puck navigation</h1>
+    <p class="sub">Set the test inputs, run the simulation, read the verdict.</p>
+  </div>
+  <div id="status" class="status idle">Connecting&hellip;</div>
+</header>
+
+<main>
+  <section class="panel" id="inputs-panel">
+    <h2>1 &nbsp;Test inputs</h2>
+    <form id="params" autocomplete="off"></form>
+    <div class="actions">
+      <button type="button" id="run" class="primary">Run test</button>
+      <button type="button" id="reset">Reset arena</button>
+      <button type="button" id="defaults">Restore defaults</button>
+    </div>
+    <p class="hint">Values outside the documented range are rejected before any
+      simulation starts &mdash; that rejection is itself testable behaviour
+      (REQ&#8209;5).</p>
+  </section>
+
+  <section class="panel" id="req-panel">
+    <h2>2 &nbsp;Requirements under test</h2>
+    <p class="hint">These are fixed. You vary the inputs, not the pass/fail rules.</p>
+    <ul id="requirements" class="reqs"></ul>
+  </section>
+
+  <section class="panel" id="result-panel">
+    <h2>3 &nbsp;Result</h2>
+    <div id="verdict" class="verdict none">No test run yet</div>
+    <p id="reason" class="reason"></p>
+
+    <table class="measurements">
+      <tbody>
+        <tr><th>Goal reached</th><td id="m-goal">&ndash;</td></tr>
+        <tr><th>Collision</th><td id="m-collision">&ndash;</td></tr>
+        <tr><th>Completion time</th><td id="m-time">&ndash;</td></tr>
+        <tr><th>Minimum clearance</th><td id="m-clearance">&ndash;</td></tr>
+        <tr><th>Stayed in arena</th><td id="m-arena">&ndash;</td></tr>
+        <tr><th>Path length</th><td id="m-path">&ndash;</td></tr>
+        <tr><th>Final distance to goal</th><td id="m-final">&ndash;</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Requirement checks</h3>
+    <ul id="checks" class="checks"><li class="muted">No test run yet.</li></ul>
+
+    <h3>Live telemetry</h3>
+    <div class="telemetry">
+      <span>t = <b id="t-time">0.00</b> s</span>
+      <span>pos = <b id="t-pos">&ndash;</b></span>
+      <span>clearance = <b id="t-clear">&ndash;</b> m</span>
+      <span>to goal = <b id="t-goal">&ndash;</b> m</span>
+    </div>
+  </section>
+
+  <section class="panel wide" id="log-panel">
+    <div class="log-head">
+      <h2>4 &nbsp;Test log</h2>
+      <div>
+        <button type="button" id="export">Download CSV</button>
+        <button type="button" id="clear-log">Clear log</button>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="log">
+        <thead>
+          <tr>
+            <th>#</th><th>Scenario</th><th>Speed</th><th>Corridor</th>
+            <th>Noise</th><th>Limit</th><th>Time</th><th>Min clr</th>
+            <th>Goal</th><th>Coll</th><th>Verdict</th><th>Reason</th>
+          </tr>
+        </thead>
+        <tbody id="log-body">
+          <tr><td colspan="12" class="muted">Runs you execute will be listed here.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>

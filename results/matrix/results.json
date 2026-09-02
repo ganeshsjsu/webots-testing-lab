@@ -1,0 +1,3342 @@
+[
+  {
+    "run_id": 1,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 21.792,
+    "timed_out": false,
+    "min_clearance": 0.0896,
+    "min_clearance_at": 12.544,
+    "min_clearance_object": "OBS0",
+    "path_length": 2.3491,
+    "final_x": 0.7376,
+    "final_y": 0.722,
+    "final_distance_to_goal": 0.0999,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 21.79 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.090 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BASE-01 default inputs"
+  },
+  {
+    "run_id": 2,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 19.744,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1653,
+    "final_x": 0.7358,
+    "final_y": 0.7252,
+    "final_distance_to_goal": 0.0986,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 19.74 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BASE-02 open field, default speed"
+  },
+  {
+    "run_id": 3,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 30.0,
+    "timed_out": true,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 0.8995,
+    "final_x": -0.1639,
+    "final_y": -0.1639,
+    "final_distance_to_goal": 1.3632,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 1.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 30 s with 1.363 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 30 s with 1.363 m still to go.",
+    "label": "EP-01 speed low partition"
+  },
+  {
+    "run_id": 4,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 30.0,
+    "timed_out": true,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.0989,
+    "final_x": 0.6841,
+    "final_y": 0.6841,
+    "final_distance_to_goal": 0.1639,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 3.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 30 s with 0.164 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 30 s with 0.164 m still to go.",
+    "label": "EP-02 speed mid partition"
+  },
+  {
+    "run_id": 5,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 19.744,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1653,
+    "final_x": 0.7358,
+    "final_y": 0.7252,
+    "final_distance_to_goal": 0.0986,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 19.74 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "EP-03 speed high partition"
+  },
+  {
+    "run_id": 6,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 30.0,
+    "timed_out": true,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 0.2998,
+    "final_x": -0.588,
+    "final_y": -0.588,
+    "final_distance_to_goal": 1.9629,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 0.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 30 s with 1.963 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 30 s with 1.963 m still to go.",
+    "label": "BVA-speed-01 min legal"
+  },
+  {
+    "run_id": 7,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 30.0,
+    "timed_out": true,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1573,
+    "final_x": 0.7205,
+    "final_y": 0.7292,
+    "final_distance_to_goal": 0.1064,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 3.6,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 30 s with 0.106 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 30 s with 0.106 m still to go.",
+    "label": "BVA-speed-02 3.6"
+  },
+  {
+    "run_id": 8,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 28.544,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1656,
+    "final_x": 0.737,
+    "final_y": 0.7234,
+    "final_distance_to_goal": 0.0992,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 3.8,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 28.54 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-speed-03 3.8"
+  },
+  {
+    "run_id": 9,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.104,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1647,
+    "final_x": 0.736,
+    "final_y": 0.7234,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.10 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-speed-04 4.0"
+  },
+  {
+    "run_id": 10,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 25.824,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1654,
+    "final_x": 0.7237,
+    "final_y": 0.7367,
+    "final_distance_to_goal": 0.0992,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 4.2,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 25.82 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-speed-05 4.2"
+  },
+  {
+    "run_id": 11,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 17.312,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1636,
+    "final_x": 0.7264,
+    "final_y": 0.7328,
+    "final_distance_to_goal": 0.0996,
+    "obstacles": [],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 6.28,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 17.31 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-speed-06 max legal"
+  },
+  {
+    "run_id": 12,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 60.0,
+    "timed_out": true,
+    "min_clearance": 0.0667,
+    "min_clearance_at": 59.728,
+    "min_clearance_object": "arena wall",
+    "path_length": 4.4487,
+    "final_x": -0.3439,
+    "final_y": 0.8821,
+    "final_distance_to_goal": 1.1469,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.5325,
+        "sx": 0.05,
+        "sy": 0.915
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.5325,
+        "sx": 0.05,
+        "sy": 0.915
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.15,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 60 s with 1.147 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.067 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 60 s with 1.147 m still to go.",
+    "label": "BVA-corr-01 0.15 min legal"
+  },
+  {
+    "run_id": 13,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 41.984,
+    "timed_out": false,
+    "min_clearance": 0.0039,
+    "min_clearance_at": 24.016,
+    "min_clearance_object": "WALL_A",
+    "path_length": 3.2549,
+    "final_x": 0.7482,
+    "final_y": 0.7147,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.5575,
+        "sx": 0.05,
+        "sy": 0.865
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.5575,
+        "sx": 0.05,
+        "sy": 0.865
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.25,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 41.98 s (limit 60 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.004 m at t = 24.02 s near WALL_A, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-3: Minimum clearance 0.004 m at t = 24.02 s near WALL_A, below the required 0.03 m.",
+    "label": "BVA-corr-02 0.25"
+  },
+  {
+    "run_id": 14,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 41.296,
+    "timed_out": false,
+    "min_clearance": 0.0083,
+    "min_clearance_at": 23.872,
+    "min_clearance_object": "WALL_A",
+    "path_length": 3.2075,
+    "final_x": 0.7497,
+    "final_y": 0.7141,
+    "final_distance_to_goal": 0.0995,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.57,
+        "sx": 0.05,
+        "sy": 0.84
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.57,
+        "sx": 0.05,
+        "sy": 0.84
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.3,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 41.30 s (limit 60 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.008 m at t = 23.87 s near WALL_A, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-3: Minimum clearance 0.008 m at t = 23.87 s near WALL_A, below the required 0.03 m.",
+    "label": "BVA-corr-03 0.30"
+  },
+  {
+    "run_id": 15,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 60.0,
+    "timed_out": true,
+    "min_clearance": 0.0098,
+    "min_clearance_at": 22.528,
+    "min_clearance_object": "WALL_A",
+    "path_length": 4.4756,
+    "final_x": -0.3465,
+    "final_y": 0.8798,
+    "final_distance_to_goal": 1.1493,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.5825,
+        "sx": 0.05,
+        "sy": 0.815
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.5825,
+        "sx": 0.05,
+        "sy": 0.815
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.35,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 60 s with 1.149 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.010 m at t = 22.53 s near WALL_A, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 60 s with 1.149 m still to go.; REQ-3: Minimum clearance 0.010 m at t = 22.53 s near WALL_A, below the required 0.03 m.",
+    "label": "BVA-corr-04 0.35"
+  },
+  {
+    "run_id": 16,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 35.696,
+    "timed_out": false,
+    "min_clearance": 0.0537,
+    "min_clearance_at": 18.016,
+    "min_clearance_object": "WALL_A",
+    "path_length": 2.8188,
+    "final_x": 0.7488,
+    "final_y": 0.7147,
+    "final_distance_to_goal": 0.0995,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.595,
+        "sx": 0.05,
+        "sy": 0.79
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.595,
+        "sx": 0.05,
+        "sy": 0.79
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 35.70 s (limit 60 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.054 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-corr-05 0.40"
+  },
+  {
+    "run_id": 17,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.104,
+    "timed_out": false,
+    "min_clearance": 0.1221,
+    "min_clearance_at": 11.728,
+    "min_clearance_object": "WALL_A",
+    "path_length": 2.1647,
+    "final_x": 0.736,
+    "final_y": 0.7234,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.62,
+        "sx": 0.05,
+        "sy": 0.74
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.62,
+        "sx": 0.05,
+        "sy": 0.74
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.5,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.10 s (limit 60 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.122 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-corr-06 0.50"
+  },
+  {
+    "run_id": 18,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.104,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1647,
+    "final_x": 0.7234,
+    "final_y": 0.736,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": 0.0,
+        "y": -0.72,
+        "sx": 0.05,
+        "sy": 0.54
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.0,
+        "y": 0.72,
+        "sx": 0.05,
+        "sy": 0.54
+      }
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "speed": 4.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.9,
+      "sensor_noise": 0.0,
+      "max_time": 60.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.10 s (limit 60 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "BVA-corr-07 0.90 max legal"
+  },
+  {
+    "run_id": 19,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.92,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.497,
+    "final_x": 0.7088,
+    "final_y": 0.7616,
+    "final_distance_to_goal": 0.099,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.92 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-noise-01 clean"
+  },
+  {
+    "run_id": 20,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.888,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.4948,
+    "final_x": 0.7145,
+    "final_y": 0.7485,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.1,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.89 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-noise-02 0.10"
+  },
+  {
+    "run_id": 21,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 28.016,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.503,
+    "final_x": 0.7707,
+    "final_y": 0.7052,
+    "final_distance_to_goal": 0.0993,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.2,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 28.02 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-noise-03 0.20"
+  },
+  {
+    "run_id": 22,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 45.008,
+    "timed_out": true,
+    "min_clearance": 0.0809,
+    "min_clearance_at": 44.192,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.8508,
+    "final_x": 0.8356,
+    "final_y": 0.579,
+    "final_distance_to_goal": 0.2238,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.3,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 45 s with 0.224 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.081 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 45 s with 0.224 m still to go.",
+    "label": "ROB-noise-04 0.30"
+  },
+  {
+    "run_id": 23,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 45.008,
+    "timed_out": true,
+    "min_clearance": 0.0818,
+    "min_clearance_at": 44.48,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.8584,
+    "final_x": 0.8547,
+    "final_y": 0.5702,
+    "final_distance_to_goal": 0.2362,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.4,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 45 s with 0.236 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.082 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 45 s with 0.236 m still to go.",
+    "label": "ROB-noise-05 0.40"
+  },
+  {
+    "run_id": 24,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 45.008,
+    "timed_out": true,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.9554,
+    "final_x": 0.546,
+    "final_y": 0.4952,
+    "final_distance_to_goal": 0.3968,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.5,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 45 s with 0.397 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 45 s with 0.397 m still to go.",
+    "label": "ROB-noise-06 0.50 max legal"
+  },
+  {
+    "run_id": 25,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 25.344,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.4972,
+    "final_x": 0.7088,
+    "final_y": 0.7611,
+    "final_distance_to_goal": 0.0991,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 25.34 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-head-01 facing goal"
+  },
+  {
+    "run_id": 26,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 25.2,
+    "timed_out": false,
+    "min_clearance": 0.1095,
+    "min_clearance_at": 15.056,
+    "min_clearance_object": "OBS0",
+    "path_length": 2.4651,
+    "final_x": 0.7525,
+    "final_y": 0.7133,
+    "final_distance_to_goal": 0.0989,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 135.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 25.20 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.110 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-head-02 90 deg off"
+  },
+  {
+    "run_id": 27,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 26.448,
+    "timed_out": false,
+    "min_clearance": 0.0919,
+    "min_clearance_at": 1.28,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.5596,
+    "final_x": 0.7126,
+    "final_y": 0.7516,
+    "final_distance_to_goal": 0.0999,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": -135.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 26.45 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.092 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-head-03 facing away"
+  },
+  {
+    "run_id": 28,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 25.344,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.4972,
+    "final_x": 0.7611,
+    "final_y": 0.7088,
+    "final_distance_to_goal": 0.0991,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 25.34 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-obst-01 obstacle on path"
+  },
+  {
+    "run_id": 29,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 45.008,
+    "timed_out": true,
+    "min_clearance": 0.072,
+    "min_clearance_at": 40.992,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.9636,
+    "final_x": 0.8803,
+    "final_y": 0.3615,
+    "final_distance_to_goal": 0.4458,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.65,
+        "y": 0.65,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.65,
+      "obstacle_y": 0.65,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 45 s with 0.446 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.072 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 45 s with 0.446 m still to go.",
+    "label": "ROB-obst-02 obstacle near goal"
+  },
+  {
+    "run_id": 30,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 40.816,
+    "timed_out": false,
+    "min_clearance": 0.0611,
+    "min_clearance_at": 15.552,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.5879,
+    "final_x": 0.7542,
+    "final_y": 0.7121,
+    "final_distance_to_goal": 0.0992,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.6,
+        "y": -0.6,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": -0.6,
+      "obstacle_y": -0.6,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 40.82 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.061 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-obst-03 obstacle near start"
+  },
+  {
+    "run_id": 31,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 21.696,
+    "timed_out": false,
+    "min_clearance": 0.153,
+    "min_clearance_at": 0.016,
+    "min_clearance_object": "arena wall",
+    "path_length": 2.1654,
+    "final_x": 0.7248,
+    "final_y": 0.736,
+    "final_distance_to_goal": 0.0987,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.5,
+        "y": -0.5,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.5,
+      "obstacle_y": -0.5,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 45.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 21.70 s (limit 45 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.153 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "ROB-obst-04 obstacle off path"
+  },
+  {
+    "run_id": 32,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.016,
+    "timed_out": true,
+    "min_clearance": 0.0594,
+    "min_clearance_at": 87.504,
+    "min_clearance_object": "arena wall",
+    "path_length": 3.3358,
+    "final_x": -0.7242,
+    "final_y": 0.825,
+    "final_distance_to_goal": 1.5244,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": -0.3,
+        "y": 0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.3,
+        "y": -0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      }
+    ],
+    "params": {
+      "scenario": "DOGLEG",
+      "speed": 2.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 1.524 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.059 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 1.524 m still to go.",
+    "label": "SC-01 dogleg slow"
+  },
+  {
+    "run_id": 33,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.0,
+    "timed_out": true,
+    "min_clearance": 0.0695,
+    "min_clearance_at": 45.856,
+    "min_clearance_object": "arena wall",
+    "path_length": 7.4615,
+    "final_x": -0.0567,
+    "final_y": 0.319,
+    "final_distance_to_goal": 0.9825,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": -0.3,
+        "y": 0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.3,
+        "y": -0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      }
+    ],
+    "params": {
+      "scenario": "DOGLEG",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 0.983 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.070 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 0.983 m still to go.",
+    "label": "SC-02 dogleg mid"
+  },
+  {
+    "run_id": 34,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 44.4,
+    "timed_out": false,
+    "min_clearance": 0.0382,
+    "min_clearance_at": 30.56,
+    "min_clearance_object": "WALL_A",
+    "path_length": 4.8796,
+    "final_x": 0.712,
+    "final_y": 0.7528,
+    "final_distance_to_goal": 0.0998,
+    "obstacles": [
+      {
+        "name": "WALL_A",
+        "shape": "box",
+        "x": -0.3,
+        "y": 0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      },
+      {
+        "name": "WALL_B",
+        "shape": "box",
+        "x": 0.3,
+        "y": -0.3,
+        "sx": 0.05,
+        "sy": 1.3
+      }
+    ],
+    "params": {
+      "scenario": "DOGLEG",
+      "speed": 6.28,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 44.40 s (limit 90 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.038 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "SC-03 dogleg fast"
+  },
+  {
+    "run_id": 35,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.0,
+    "timed_out": true,
+    "min_clearance": 0.0461,
+    "min_clearance_at": 50.096,
+    "min_clearance_object": "OBS2",
+    "path_length": 3.4252,
+    "final_x": 0.6195,
+    "final_y": -0.0252,
+    "final_distance_to_goal": 0.8447,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 2.0,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 0.845 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.046 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 0.845 m still to go.",
+    "label": "SC-04 clutter slow"
+  },
+  {
+    "run_id": 36,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 52.768,
+    "timed_out": false,
+    "min_clearance": 0.0446,
+    "min_clearance_at": 27.424,
+    "min_clearance_object": "OBS5",
+    "path_length": 4.472,
+    "final_x": 0.7012,
+    "final_y": 0.7992,
+    "final_distance_to_goal": 0.0988,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 52.77 s (limit 90 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.045 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "SC-05 clutter mid"
+  },
+  {
+    "run_id": 37,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 27.536,
+    "timed_out": false,
+    "min_clearance": 0.0311,
+    "min_clearance_at": 16.8,
+    "min_clearance_object": "OBS2",
+    "path_length": 3.0477,
+    "final_x": 0.7875,
+    "final_y": 0.7012,
+    "final_distance_to_goal": 0.0996,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 6.28,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 27.54 s (limit 90 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.031 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "SC-06 clutter fast"
+  },
+  {
+    "run_id": 38,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 21.792,
+    "timed_out": false,
+    "min_clearance": 0.0896,
+    "min_clearance_at": 12.544,
+    "min_clearance_object": "OBS0",
+    "path_length": 2.3491,
+    "final_x": 0.7376,
+    "final_y": 0.722,
+    "final_distance_to_goal": 0.0999,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 21.79 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.090 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "REP-01 repeatability x3#1"
+  },
+  {
+    "run_id": 39,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 21.792,
+    "timed_out": false,
+    "min_clearance": 0.0896,
+    "min_clearance_at": 12.544,
+    "min_clearance_object": "OBS0",
+    "path_length": 2.3491,
+    "final_x": 0.722,
+    "final_y": 0.7376,
+    "final_distance_to_goal": 0.0999,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 21.79 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.090 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "REP-01 repeatability x3#2"
+  },
+  {
+    "run_id": 40,
+    "goal_reached": true,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 21.792,
+    "timed_out": false,
+    "min_clearance": 0.0896,
+    "min_clearance_at": 12.544,
+    "min_clearance_object": "OBS0",
+    "path_length": 2.3491,
+    "final_x": 0.7376,
+    "final_y": 0.722,
+    "final_distance_to_goal": 0.0999,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": 0.0,
+        "y": 0.0,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "SINGLE_OBSTACLE",
+      "speed": 5.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.0,
+      "max_time": 30.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "PASS",
+        "detail": "Goal reached after 21.79 s (limit 30 s)."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "PASS",
+        "detail": "Minimum clearance 0.090 m (required 0.03 m)."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "PASS",
+    "reason": "All requirements satisfied.",
+    "label": "REP-01 repeatability x3#3"
+  },
+  {
+    "run_id": 41,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.0,
+    "timed_out": true,
+    "min_clearance": 0.0201,
+    "min_clearance_at": 19.328,
+    "min_clearance_object": "OBS0",
+    "path_length": 7.2868,
+    "final_x": -0.1995,
+    "final_y": 0.8704,
+    "final_distance_to_goal": 1.002,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.35,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 1.002 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 1.002 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m.",
+    "label": "REP-02 repeatability with noise x3#1"
+  },
+  {
+    "run_id": 42,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.0,
+    "timed_out": true,
+    "min_clearance": 0.0201,
+    "min_clearance_at": 19.328,
+    "min_clearance_object": "OBS0",
+    "path_length": 7.2868,
+    "final_x": -0.1995,
+    "final_y": 0.8704,
+    "final_distance_to_goal": 1.002,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.35,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 1.002 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 1.002 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m.",
+    "label": "REP-02 repeatability with noise x3#2"
+  },
+  {
+    "run_id": 43,
+    "goal_reached": false,
+    "collision": false,
+    "collision_object": null,
+    "left_arena": false,
+    "completion_time": 90.0,
+    "timed_out": true,
+    "min_clearance": 0.0203,
+    "min_clearance_at": 19.328,
+    "min_clearance_object": "OBS0",
+    "path_length": 7.2884,
+    "final_x": -0.2026,
+    "final_y": 0.8711,
+    "final_distance_to_goal": 1.0051,
+    "obstacles": [
+      {
+        "name": "OBS0",
+        "shape": "cylinder",
+        "x": -0.35,
+        "y": -0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS1",
+        "shape": "cylinder",
+        "x": -0.1,
+        "y": 0.35,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS2",
+        "shape": "cylinder",
+        "x": 0.2,
+        "y": -0.05,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS3",
+        "shape": "cylinder",
+        "x": 0.15,
+        "y": 0.55,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS4",
+        "shape": "cylinder",
+        "x": 0.55,
+        "y": 0.2,
+        "radius": 0.075
+      },
+      {
+        "name": "OBS5",
+        "shape": "cylinder",
+        "x": -0.55,
+        "y": 0.15,
+        "radius": 0.075
+      }
+    ],
+    "params": {
+      "scenario": "CLUTTER",
+      "speed": 4.5,
+      "start_x": -0.8,
+      "start_y": -0.8,
+      "start_heading_deg": 45.0,
+      "goal_x": 0.8,
+      "goal_y": 0.8,
+      "obstacle_x": 0.0,
+      "obstacle_y": 0.0,
+      "corridor_width": 0.4,
+      "sensor_noise": 0.35,
+      "max_time": 90.0,
+      "seed": 1
+    },
+    "checks": [
+      {
+        "id": "REQ-1",
+        "status": "FAIL",
+        "detail": "Timed out after 90 s with 1.005 m still to go."
+      },
+      {
+        "id": "REQ-2",
+        "status": "PASS",
+        "detail": "No contact with any obstacle or wall."
+      },
+      {
+        "id": "REQ-3",
+        "status": "FAIL",
+        "detail": "Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+      },
+      {
+        "id": "REQ-4",
+        "status": "PASS",
+        "detail": "Robot stayed inside the arena."
+      },
+      {
+        "id": "REQ-5",
+        "status": "PASS",
+        "detail": "All inputs were inside the documented ranges."
+      }
+    ],
+    "verdict": "FAIL",
+    "reason": "REQ-1: Timed out after 90 s with 1.005 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m.",
+    "label": "REP-02 repeatability with noise x3#3"
+  },
+  {
+    "label": "REJ-01 speed above max",
+    "verdict": "REJECTED",
+    "errors": [
+      "Wheel speed ('speed'): 99.0 is outside the documented range [0.5, 6.28] rad/s."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 99
+    }
+  },
+  {
+    "label": "REJ-02 speed below min",
+    "verdict": "REJECTED",
+    "errors": [
+      "Wheel speed ('speed'): 0.0 is outside the documented range [0.5, 6.28] rad/s."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": 0
+    }
+  },
+  {
+    "label": "REJ-03 speed not a number",
+    "verdict": "REJECTED",
+    "errors": [
+      "Wheel speed ('speed'): 'fast' is not a number."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "speed": "fast"
+    }
+  },
+  {
+    "label": "REJ-04 goal outside arena",
+    "verdict": "REJECTED",
+    "errors": [
+      "Goal X ('goal_x'): 5.0 is outside the documented range [-0.85, 0.85] m."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "goal_x": 5.0
+    }
+  },
+  {
+    "label": "REJ-05 corridor below min",
+    "verdict": "REJECTED",
+    "errors": [
+      "Corridor width ('corridor_width'): 0.05 is outside the documented range [0.15, 0.9] m."
+    ],
+    "params": {
+      "scenario": "CORRIDOR",
+      "corridor_width": 0.05
+    }
+  },
+  {
+    "label": "REJ-06 unknown scenario",
+    "verdict": "REJECTED",
+    "errors": [
+      "Scenario ('scenario'): 'MAZE' is not one of OPEN_FIELD, SINGLE_OBSTACLE, CORRIDOR, DOGLEG, CLUTTER."
+    ],
+    "params": {
+      "scenario": "MAZE"
+    }
+  },
+  {
+    "label": "REJ-07 time limit above max",
+    "verdict": "REJECTED",
+    "errors": [
+      "Max execution time ('max_time'): 600.0 is outside the documented range [5.0, 120.0] s."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "max_time": 600
+    }
+  },
+  {
+    "label": "REJ-08 seed not an integer",
+    "verdict": "REJECTED",
+    "errors": [
+      "Noise seed ('seed'): must be a whole number, got 2.5."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "seed": 2.5
+    }
+  },
+  {
+    "label": "REJ-09 goal on top of start",
+    "verdict": "REJECTED",
+    "errors": [
+      "Start and goal are 0.020 m apart, which is inside the 0.10 m goal tolerance: the test would pass before the robot moves. Move them at least 0.10 m apart."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "goal_x": -0.8,
+      "goal_y": -0.78
+    }
+  },
+  {
+    "label": "REJ-10 unknown parameter",
+    "verdict": "REJECTED",
+    "errors": [
+      "Unknown parameter 'turbo'."
+    ],
+    "params": {
+      "scenario": "OPEN_FIELD",
+      "turbo": 1
+    }
+  }
+]

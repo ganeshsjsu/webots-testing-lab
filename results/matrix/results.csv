@@ -1,0 +1,54 @@
+label,verdict,scenario,speed,corridor_width,sensor_noise,start_heading_deg,obstacle_x,obstacle_y,max_time,completion_time,min_clearance,goal_reached,collision,left_arena,timed_out,path_length,final_distance_to_goal,reason
+BASE-01 default inputs,PASS,SINGLE_OBSTACLE,5.5,0.4,0.0,45.0,0.0,0.0,30.0,21.792,0.0896,True,False,False,False,2.3491,0.0999,All requirements satisfied.
+"BASE-02 open field, default speed",PASS,OPEN_FIELD,5.5,0.4,0.0,45.0,0.0,0.0,30.0,19.744,0.153,True,False,False,False,2.1653,0.0986,All requirements satisfied.
+EP-01 speed low partition,FAIL,OPEN_FIELD,1.5,0.4,0.0,45.0,0.0,0.0,30.0,30.0,0.153,False,False,False,True,0.8995,1.3632,REQ-1: Timed out after 30 s with 1.363 m still to go.
+EP-02 speed mid partition,FAIL,OPEN_FIELD,3.5,0.4,0.0,45.0,0.0,0.0,30.0,30.0,0.153,False,False,False,True,2.0989,0.1639,REQ-1: Timed out after 30 s with 0.164 m still to go.
+EP-03 speed high partition,PASS,OPEN_FIELD,5.5,0.4,0.0,45.0,0.0,0.0,30.0,19.744,0.153,True,False,False,False,2.1653,0.0986,All requirements satisfied.
+BVA-speed-01 min legal,FAIL,OPEN_FIELD,0.5,0.4,0.0,45.0,0.0,0.0,30.0,30.0,0.153,False,False,False,True,0.2998,1.9629,REQ-1: Timed out after 30 s with 1.963 m still to go.
+BVA-speed-02 3.6,FAIL,OPEN_FIELD,3.6,0.4,0.0,45.0,0.0,0.0,30.0,30.0,0.153,False,False,False,True,2.1573,0.1064,REQ-1: Timed out after 30 s with 0.106 m still to go.
+BVA-speed-03 3.8,PASS,OPEN_FIELD,3.8,0.4,0.0,45.0,0.0,0.0,30.0,28.544,0.153,True,False,False,False,2.1656,0.0992,All requirements satisfied.
+BVA-speed-04 4.0,PASS,OPEN_FIELD,4.0,0.4,0.0,45.0,0.0,0.0,30.0,27.104,0.153,True,False,False,False,2.1647,0.0998,All requirements satisfied.
+BVA-speed-05 4.2,PASS,OPEN_FIELD,4.2,0.4,0.0,45.0,0.0,0.0,30.0,25.824,0.153,True,False,False,False,2.1654,0.0992,All requirements satisfied.
+BVA-speed-06 max legal,PASS,OPEN_FIELD,6.28,0.4,0.0,45.0,0.0,0.0,30.0,17.312,0.153,True,False,False,False,2.1636,0.0996,All requirements satisfied.
+BVA-corr-01 0.15 min legal,FAIL,CORRIDOR,4.0,0.15,0.0,45.0,0.0,0.0,60.0,60.0,0.0667,False,False,False,True,4.4487,1.1469,REQ-1: Timed out after 60 s with 1.147 m still to go.
+BVA-corr-02 0.25,FAIL,CORRIDOR,4.0,0.25,0.0,45.0,0.0,0.0,60.0,41.984,0.0039,True,False,False,False,3.2549,0.0998,"REQ-3: Minimum clearance 0.004 m at t = 24.02 s near WALL_A, below the required 0.03 m."
+BVA-corr-03 0.30,FAIL,CORRIDOR,4.0,0.3,0.0,45.0,0.0,0.0,60.0,41.296,0.0083,True,False,False,False,3.2075,0.0995,"REQ-3: Minimum clearance 0.008 m at t = 23.87 s near WALL_A, below the required 0.03 m."
+BVA-corr-04 0.35,FAIL,CORRIDOR,4.0,0.35,0.0,45.0,0.0,0.0,60.0,60.0,0.0098,False,False,False,True,4.4756,1.1493,"REQ-1: Timed out after 60 s with 1.149 m still to go.; REQ-3: Minimum clearance 0.010 m at t = 22.53 s near WALL_A, below the required 0.03 m."
+BVA-corr-05 0.40,PASS,CORRIDOR,4.0,0.4,0.0,45.0,0.0,0.0,60.0,35.696,0.0537,True,False,False,False,2.8188,0.0995,All requirements satisfied.
+BVA-corr-06 0.50,PASS,CORRIDOR,4.0,0.5,0.0,45.0,0.0,0.0,60.0,27.104,0.1221,True,False,False,False,2.1647,0.0998,All requirements satisfied.
+BVA-corr-07 0.90 max legal,PASS,CORRIDOR,4.0,0.9,0.0,45.0,0.0,0.0,60.0,27.104,0.153,True,False,False,False,2.1647,0.0998,All requirements satisfied.
+ROB-noise-01 clean,PASS,SINGLE_OBSTACLE,4.5,0.4,0.0,45.0,0.0,0.0,45.0,27.92,0.153,True,False,False,False,2.497,0.099,All requirements satisfied.
+ROB-noise-02 0.10,PASS,SINGLE_OBSTACLE,4.5,0.4,0.1,45.0,0.0,0.0,45.0,27.888,0.153,True,False,False,False,2.4948,0.0998,All requirements satisfied.
+ROB-noise-03 0.20,PASS,SINGLE_OBSTACLE,4.5,0.4,0.2,45.0,0.0,0.0,45.0,28.016,0.153,True,False,False,False,2.503,0.0993,All requirements satisfied.
+ROB-noise-04 0.30,FAIL,SINGLE_OBSTACLE,4.5,0.4,0.3,45.0,0.0,0.0,45.0,45.008,0.0809,False,False,False,True,3.8508,0.2238,REQ-1: Timed out after 45 s with 0.224 m still to go.
+ROB-noise-05 0.40,FAIL,SINGLE_OBSTACLE,4.5,0.4,0.4,45.0,0.0,0.0,45.0,45.008,0.0818,False,False,False,True,3.8584,0.2362,REQ-1: Timed out after 45 s with 0.236 m still to go.
+ROB-noise-06 0.50 max legal,FAIL,SINGLE_OBSTACLE,4.5,0.4,0.5,45.0,0.0,0.0,45.0,45.008,0.153,False,False,False,True,3.9554,0.3968,REQ-1: Timed out after 45 s with 0.397 m still to go.
+ROB-head-01 facing goal,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,45.0,0.0,0.0,45.0,25.344,0.153,True,False,False,False,2.4972,0.0991,All requirements satisfied.
+ROB-head-02 90 deg off,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,135.0,0.0,0.0,45.0,25.2,0.1095,True,False,False,False,2.4651,0.0989,All requirements satisfied.
+ROB-head-03 facing away,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,-135.0,0.0,0.0,45.0,26.448,0.0919,True,False,False,False,2.5596,0.0999,All requirements satisfied.
+ROB-obst-01 obstacle on path,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,45.0,0.0,0.0,45.0,25.344,0.153,True,False,False,False,2.4972,0.0991,All requirements satisfied.
+ROB-obst-02 obstacle near goal,FAIL,SINGLE_OBSTACLE,5.0,0.4,0.0,45.0,0.65,0.65,45.0,45.008,0.072,False,False,False,True,3.9636,0.4458,REQ-1: Timed out after 45 s with 0.446 m still to go.
+ROB-obst-03 obstacle near start,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,45.0,-0.6,-0.6,45.0,40.816,0.0611,True,False,False,False,3.5879,0.0992,All requirements satisfied.
+ROB-obst-04 obstacle off path,PASS,SINGLE_OBSTACLE,5.0,0.4,0.0,45.0,0.5,-0.5,45.0,21.696,0.153,True,False,False,False,2.1654,0.0987,All requirements satisfied.
+SC-01 dogleg slow,FAIL,DOGLEG,2.0,0.4,0.0,45.0,0.0,0.0,90.0,90.016,0.0594,False,False,False,True,3.3358,1.5244,REQ-1: Timed out after 90 s with 1.524 m still to go.
+SC-02 dogleg mid,FAIL,DOGLEG,4.5,0.4,0.0,45.0,0.0,0.0,90.0,90.0,0.0695,False,False,False,True,7.4615,0.9825,REQ-1: Timed out after 90 s with 0.983 m still to go.
+SC-03 dogleg fast,PASS,DOGLEG,6.28,0.4,0.0,45.0,0.0,0.0,90.0,44.4,0.0382,True,False,False,False,4.8796,0.0998,All requirements satisfied.
+SC-04 clutter slow,FAIL,CLUTTER,2.0,0.4,0.0,45.0,0.0,0.0,90.0,90.0,0.0461,False,False,False,True,3.4252,0.8447,REQ-1: Timed out after 90 s with 0.845 m still to go.
+SC-05 clutter mid,PASS,CLUTTER,4.5,0.4,0.0,45.0,0.0,0.0,90.0,52.768,0.0446,True,False,False,False,4.472,0.0988,All requirements satisfied.
+SC-06 clutter fast,PASS,CLUTTER,6.28,0.4,0.0,45.0,0.0,0.0,90.0,27.536,0.0311,True,False,False,False,3.0477,0.0996,All requirements satisfied.
+REP-01 repeatability x3#1,PASS,SINGLE_OBSTACLE,5.5,0.4,0.0,45.0,0.0,0.0,30.0,21.792,0.0896,True,False,False,False,2.3491,0.0999,All requirements satisfied.
+REP-01 repeatability x3#2,PASS,SINGLE_OBSTACLE,5.5,0.4,0.0,45.0,0.0,0.0,30.0,21.792,0.0896,True,False,False,False,2.3491,0.0999,All requirements satisfied.
+REP-01 repeatability x3#3,PASS,SINGLE_OBSTACLE,5.5,0.4,0.0,45.0,0.0,0.0,30.0,21.792,0.0896,True,False,False,False,2.3491,0.0999,All requirements satisfied.
+REP-02 repeatability with noise x3#1,FAIL,CLUTTER,4.5,0.4,0.35,45.0,0.0,0.0,90.0,90.0,0.0201,False,False,False,True,7.2868,1.002,"REQ-1: Timed out after 90 s with 1.002 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+REP-02 repeatability with noise x3#2,FAIL,CLUTTER,4.5,0.4,0.35,45.0,0.0,0.0,90.0,90.0,0.0201,False,False,False,True,7.2868,1.002,"REQ-1: Timed out after 90 s with 1.002 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+REP-02 repeatability with noise x3#3,FAIL,CLUTTER,4.5,0.4,0.35,45.0,0.0,0.0,90.0,90.0,0.0203,False,False,False,True,7.2884,1.0051,"REQ-1: Timed out after 90 s with 1.005 m still to go.; REQ-3: Minimum clearance 0.020 m at t = 19.33 s near OBS0, below the required 0.03 m."
+REJ-01 speed above max,REJECTED,OPEN_FIELD,99,,,,,,,,,,,,,,,"Wheel speed ('speed'): 99.0 is outside the documented range [0.5, 6.28] rad/s."
+REJ-02 speed below min,REJECTED,OPEN_FIELD,0,,,,,,,,,,,,,,,"Wheel speed ('speed'): 0.0 is outside the documented range [0.5, 6.28] rad/s."
+REJ-03 speed not a number,REJECTED,OPEN_FIELD,fast,,,,,,,,,,,,,,,Wheel speed ('speed'): 'fast' is not a number.
+REJ-04 goal outside arena,REJECTED,OPEN_FIELD,,,,,,,,,,,,,,,,"Goal X ('goal_x'): 5.0 is outside the documented range [-0.85, 0.85] m."
+REJ-05 corridor below min,REJECTED,CORRIDOR,,0.05,,,,,,,,,,,,,,"Corridor width ('corridor_width'): 0.05 is outside the documented range [0.15, 0.9] m."
+REJ-06 unknown scenario,REJECTED,MAZE,,,,,,,,,,,,,,,,"Scenario ('scenario'): 'MAZE' is not one of OPEN_FIELD, SINGLE_OBSTACLE, CORRIDOR, DOGLEG, CLUTTER."
+REJ-07 time limit above max,REJECTED,OPEN_FIELD,,,,,,,600,,,,,,,,,"Max execution time ('max_time'): 600.0 is outside the documented range [5.0, 120.0] s."
+REJ-08 seed not an integer,REJECTED,OPEN_FIELD,,,,,,,,,,,,,,,,"Noise seed ('seed'): must be a whole number, got 2.5."
+REJ-09 goal on top of start,REJECTED,OPEN_FIELD,,,,,,,,,,,,,,,,"Start and goal are 0.020 m apart, which is inside the 0.10 m goal tolerance: the test would pass before the robot moves. Move them at least 0.10 m apart."
+REJ-10 unknown parameter,REJECTED,OPEN_FIELD,,,,,,,,,,,,,,,,Unknown parameter 'turbo'.

@@ -1,0 +1,7 @@
+# webots.cloud repository descriptor.
+#
+# "demo" publishes every world in worlds/ as an interactive run session, which
+# is what the students need: a link that opens the live simulation and its
+# Robot Window without any login.
+type: demo
+publish: true

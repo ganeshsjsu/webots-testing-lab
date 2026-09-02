@@ -1,0 +1,266 @@
+:root {
+  --bg: #f4f5f7;
+  --panel: #ffffff;
+  --ink: #1d2430;
+  --muted: #667085;
+  --line: #dfe3e8;
+  --accent: #1f5fa8;
+  --pass: #0f7a3d;
+  --pass-bg: #e6f4ec;
+  --fail: #b3261e;
+  --fail-bg: #fdeceb;
+  --warn: #8a5a00;
+  --warn-bg: #fdf3e2;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 0 24px;
+  background: var(--bg);
+  color: var(--ink);
+  font: 13px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 16px;
+  background: var(--panel);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.bar h1 { font-size: 15px; margin: 0; }
+.sub { margin: 2px 0 0; color: var(--muted); font-size: 12px; }
+
+.status {
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.status.idle { background: #eef1f5; color: var(--muted); }
+.status.running { background: var(--warn-bg); color: var(--warn); }
+.status.error { background: var(--fail-bg); color: var(--fail); }
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+  padding: 12px 16px;
+  align-items: start;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.panel.wide { grid-column: 1 / -1; }
+
+h2 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 0 0 10px;
+}
+h3 {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin: 16px 0 6px;
+}
+
+/* --- form ------------------------------------------------------------- */
+
+.field { margin-bottom: 9px; }
+.field.hidden { display: none; }
+
+.field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.field .range {
+  color: var(--muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  margin: 3px 0 0;
+}
+.field input, .field select {
+  width: 100%;
+  padding: 5px 7px;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  font: inherit;
+  background: #fff;
+  color: inherit;
+}
+.field input:focus, .field select:focus {
+  outline: 2px solid rgba(31, 95, 168, 0.35);
+  border-color: var(--accent);
+}
+.field.invalid input { border-color: var(--fail); background: var(--fail-bg); }
+.field .help {
+  color: var(--muted);
+  font-size: 11px;
+  margin: 3px 0 0;
+}
+.field .err {
+  color: var(--fail);
+  font-size: 11px;
+  margin: 3px 0 0;
+  display: none;
+}
+.field.invalid .err { display: block; }
+
+.actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+
+button {
+  font: inherit;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+button:hover { background: #f0f2f5; }
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+button.primary:hover { background: #17497f; }
+button:disabled { opacity: 0.5; cursor: default; }
+
+.hint { color: var(--muted); font-size: 11px; margin: 10px 0 0; }
+
+/* --- requirements ------------------------------------------------------ */
+
+.reqs { list-style: none; margin: 0; padding: 0; }
+.reqs li {
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+}
+.reqs li:first-child { border-top: 0; }
+.reqs .id {
+  font-weight: 700;
+  color: var(--accent);
+  flex: 0 0 46px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- result ------------------------------------------------------------ */
+
+.verdict {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 6px;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+.verdict.none { background: #eef1f5; color: var(--muted); font-size: 13px; }
+.verdict.pass { background: var(--pass-bg); color: var(--pass); }
+.verdict.fail { background: var(--fail-bg); color: var(--fail); }
+.verdict.rejected { background: var(--warn-bg); color: var(--warn); font-size: 14px; }
+
+.reason { margin: 8px 0 0; color: var(--ink); }
+.reason:empty { display: none; }
+
+table.measurements { width: 100%; border-collapse: collapse; margin-top: 12px; }
+table.measurements th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+  width: 55%;
+}
+table.measurements td {
+  text-align: right;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--line);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.checks { list-style: none; margin: 0; padding: 0; }
+.checks li {
+  padding: 6px 0;
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+.checks li:first-child { border-top: 0; }
+.checks .tag {
+  flex: 0 0 auto;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.checks .tag.pass { background: var(--pass-bg); color: var(--pass); }
+.checks .tag.fail { background: var(--fail-bg); color: var(--fail); }
+.checks .id { flex: 0 0 44px; font-weight: 700; color: var(--muted); }
+
+.telemetry {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+.telemetry b { color: var(--ink); }
+
+.muted { color: var(--muted); }
+
+/* --- log --------------------------------------------------------------- */
+
+.log-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.log-head h2 { margin: 0; }
+.log-head > div { display: flex; gap: 8px; }
+
+.table-scroll { overflow-x: auto; margin-top: 10px; }
+
+table.log { width: 100%; border-collapse: collapse; font-size: 12px; }
+table.log th, table.log td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+table.log th { color: var(--muted); font-weight: 600; }
+table.log td.num { text-align: right; font-variant-numeric: tabular-nums; }
+table.log td.reason { white-space: normal; min-width: 240px; color: var(--muted); }
+table.log tr.pass td.v { color: var(--pass); font-weight: 700; }
+table.log tr.fail td.v { color: var(--fail); font-weight: 700; }
+table.log tr.rejected td.v { color: var(--warn); font-weight: 700; }
+
+/* Two-column parameter form so the panel does not become a long ribbon. */
+#params {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0 14px;
+}
+#field-scenario { grid-column: 1 / -1; }
+#field-scenario select { max-width: 340px; }
+
+@media (max-width: 780px) {
+  #params { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,9 @@
+# Batch output. The committed matrix under results/matrix/ is the evidence
+# referenced by docs/VALIDATION_CHECKLIST.md; everything else is scratch.
+results/*
+!results/matrix/
+results/matrix/webots.log
+__pycache__/
+*.pyc
+*.wbproj
+.DS_Store

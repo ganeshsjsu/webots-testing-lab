@@ -1,0 +1,60 @@
+[
+  { "label": "BASE-01 default inputs",              "scenario": "SINGLE_OBSTACLE", "speed": 5.5, "max_time": 30 },
+  { "label": "BASE-02 open field, default speed",   "scenario": "OPEN_FIELD",      "speed": 5.5, "max_time": 30 },
+
+  { "label": "EP-01 speed low partition",           "scenario": "OPEN_FIELD", "speed": 1.5, "max_time": 30 },
+  { "label": "EP-02 speed mid partition",           "scenario": "OPEN_FIELD", "speed": 3.5, "max_time": 30 },
+  { "label": "EP-03 speed high partition",          "scenario": "OPEN_FIELD", "speed": 5.5, "max_time": 30 },
+
+  { "label": "BVA-speed-01 min legal",              "scenario": "OPEN_FIELD", "speed": 0.5,  "max_time": 30 },
+  { "label": "BVA-speed-02 3.6",                    "scenario": "OPEN_FIELD", "speed": 3.6,  "max_time": 30 },
+  { "label": "BVA-speed-03 3.8",                    "scenario": "OPEN_FIELD", "speed": 3.8,  "max_time": 30 },
+  { "label": "BVA-speed-04 4.0",                    "scenario": "OPEN_FIELD", "speed": 4.0,  "max_time": 30 },
+  { "label": "BVA-speed-05 4.2",                    "scenario": "OPEN_FIELD", "speed": 4.2,  "max_time": 30 },
+  { "label": "BVA-speed-06 max legal",              "scenario": "OPEN_FIELD", "speed": 6.28, "max_time": 30 },
+
+  { "label": "BVA-corr-01 0.15 min legal",          "scenario": "CORRIDOR", "corridor_width": 0.15, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-02 0.25",                    "scenario": "CORRIDOR", "corridor_width": 0.25, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-03 0.30",                    "scenario": "CORRIDOR", "corridor_width": 0.30, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-04 0.35",                    "scenario": "CORRIDOR", "corridor_width": 0.35, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-05 0.40",                    "scenario": "CORRIDOR", "corridor_width": 0.40, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-06 0.50",                    "scenario": "CORRIDOR", "corridor_width": 0.50, "speed": 4.0, "max_time": 60 },
+  { "label": "BVA-corr-07 0.90 max legal",          "scenario": "CORRIDOR", "corridor_width": 0.90, "speed": 4.0, "max_time": 60 },
+
+  { "label": "ROB-noise-01 clean",                  "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.0,  "max_time": 45 },
+  { "label": "ROB-noise-02 0.10",                   "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.10, "max_time": 45 },
+  { "label": "ROB-noise-03 0.20",                   "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.20, "max_time": 45 },
+  { "label": "ROB-noise-04 0.30",                   "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.30, "max_time": 45 },
+  { "label": "ROB-noise-05 0.40",                   "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.40, "max_time": 45 },
+  { "label": "ROB-noise-06 0.50 max legal",         "scenario": "SINGLE_OBSTACLE", "speed": 4.5, "sensor_noise": 0.50, "max_time": 45 },
+
+  { "label": "ROB-head-01 facing goal",             "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "start_heading_deg": 45,   "max_time": 45 },
+  { "label": "ROB-head-02 90 deg off",              "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "start_heading_deg": 135,  "max_time": 45 },
+  { "label": "ROB-head-03 facing away",             "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "start_heading_deg": -135, "max_time": 45 },
+
+  { "label": "ROB-obst-01 obstacle on path",        "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "obstacle_x": 0.0,  "obstacle_y": 0.0,  "max_time": 45 },
+  { "label": "ROB-obst-02 obstacle near goal",      "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "obstacle_x": 0.65, "obstacle_y": 0.65, "max_time": 45 },
+  { "label": "ROB-obst-03 obstacle near start",     "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "obstacle_x": -0.6, "obstacle_y": -0.6, "max_time": 45 },
+  { "label": "ROB-obst-04 obstacle off path",       "scenario": "SINGLE_OBSTACLE", "speed": 5.0, "obstacle_x": 0.5,  "obstacle_y": -0.5, "max_time": 45 },
+
+  { "label": "SC-01 dogleg slow",                   "scenario": "DOGLEG",  "speed": 2.0,  "max_time": 90 },
+  { "label": "SC-02 dogleg mid",                    "scenario": "DOGLEG",  "speed": 4.5,  "max_time": 90 },
+  { "label": "SC-03 dogleg fast",                   "scenario": "DOGLEG",  "speed": 6.28, "max_time": 90 },
+  { "label": "SC-04 clutter slow",                  "scenario": "CLUTTER", "speed": 2.0,  "max_time": 90 },
+  { "label": "SC-05 clutter mid",                   "scenario": "CLUTTER", "speed": 4.5,  "max_time": 90 },
+  { "label": "SC-06 clutter fast",                  "scenario": "CLUTTER", "speed": 6.28, "max_time": 90 },
+
+  { "label": "REP-01 repeatability x3",             "scenario": "SINGLE_OBSTACLE", "speed": 5.5, "max_time": 30, "repeats": 3 },
+  { "label": "REP-02 repeatability with noise x3",  "scenario": "CLUTTER", "speed": 4.5, "sensor_noise": 0.35, "max_time": 90, "repeats": 3 },
+
+  { "label": "REJ-01 speed above max",              "scenario": "OPEN_FIELD", "speed": 99 },
+  { "label": "REJ-02 speed below min",              "scenario": "OPEN_FIELD", "speed": 0 },
+  { "label": "REJ-03 speed not a number",           "scenario": "OPEN_FIELD", "speed": "fast" },
+  { "label": "REJ-04 goal outside arena",           "scenario": "OPEN_FIELD", "goal_x": 5.0 },
+  { "label": "REJ-05 corridor below min",           "scenario": "CORRIDOR", "corridor_width": 0.05 },
+  { "label": "REJ-06 unknown scenario",             "scenario": "MAZE" },
+  { "label": "REJ-07 time limit above max",         "scenario": "OPEN_FIELD", "max_time": 600 },
+  { "label": "REJ-08 seed not an integer",          "scenario": "OPEN_FIELD", "seed": 2.5 },
+  { "label": "REJ-09 goal on top of start",         "scenario": "OPEN_FIELD", "goal_x": -0.8, "goal_y": -0.78 },
+  { "label": "REJ-10 unknown parameter",            "scenario": "OPEN_FIELD", "turbo": 1 }
+]
