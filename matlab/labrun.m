@@ -26,8 +26,10 @@ switch params.robot
               'MaxSteeringAngle',S.MAX_STEER, ...
               'VehicleInputs','VehicleSpeedSteeringAngle');
     case 'UNICYCLE'
+        % No TrackWidth: the unicycle model takes a speed and a heading rate
+        % directly, so it has no axle length to convert wheel speeds through.
         rob = unicycleKinematics('WheelRadius',S.WHEEL_RADIUS, ...
-              'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
+              'VehicleInputs','VehicleSpeedHeadingRate');
     otherwise
         rob = differentialDriveKinematics('WheelRadius',S.WHEEL_RADIUS, ...
               'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
