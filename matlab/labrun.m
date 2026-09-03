@@ -31,6 +31,7 @@ pose  = [params.start_x; params.start_y; deg2rad(params.start_heading_deg)];
 
 dt = opts.Dt; t = 0; k = 0;
 minClear  = inf; collided = false; leftArena = false; pathLen = 0;
+avoiding = false; avoidDir = 0;      % latched avoidance state
 trail = pose(1:2)';
 
 every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
@@ -50,9 +51,22 @@ while t < params.max_time
 
     bearing = atan2(goal(2)-pose(2), goal(1)-pose(1)) - pose(3);
     bearing = atan2(sin(bearing), cos(bearing));
-    if min([front left right]) < 0.20
-        if right < left, w = wmax; else, w = -wmax; end
-        v = vmax * 0.5;
+
+    % Reactive avoidance with hysteresis and a latched turn direction.
+    % Without the latch this oscillates: it turns away, the obstacle leaves
+    % the trigger window, goal-seeking snaps it back, and the two cancel
+    % into a straight line through the obstacle.
+    nearest = min([front left right]);
+    if nearest < 0.20, avoiding = true; end
+    if avoiding && nearest > 0.28, avoiding = false; avoidDir = 0; end
+
+    if avoiding
+        if avoidDir == 0
+            avoidDir = sign(left - right);        % commit to the freer side
+            if avoidDir == 0, avoidDir = 1; end
+        end
+        w = avoidDir * wmax * 0.7;
+        v = vmax * 0.6;
     else
         w = max(min(3.0*bearing, wmax), -wmax);
         v = vmax;
