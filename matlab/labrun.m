@@ -14,30 +14,26 @@ arguments
 end
 
 S     = labspec();
+RB    = S.robots(strcmp({S.robots.key}, params.robot));
+if isempty(RB), error('labrun:robot','Unknown robot ''%s''.', params.robot); end
 items = lablayout(params);
 map   = i_buildmap(S, items);
 
 lidar = rangeSensor('Range',[0 S.SENSOR_RANGE], ...
         'HorizontalAngle',[S.SENSOR_ANGLES(1) S.SENSOR_ANGLES(end)], ...
         'HorizontalAngleResolution', S.SENSOR_ANGLES(3)-S.SENSOR_ANGLES(2));
-switch params.robot
-    case 'CAR_LIKE'
-        rob = bicycleKinematics('WheelBase',S.WHEELBASE, ...
-              'MaxSteeringAngle',S.MAX_STEER, ...
-              'VehicleInputs','VehicleSpeedSteeringAngle');
-    case 'UNICYCLE'
-        % No TrackWidth: the unicycle model takes a speed and a heading rate
-        % directly, so it has no axle length to convert wheel speeds through.
-        rob = unicycleKinematics('WheelRadius',S.WHEEL_RADIUS, ...
-              'VehicleInputs','VehicleSpeedHeadingRate');
-    otherwise
-        rob = differentialDriveKinematics('WheelRadius',S.WHEEL_RADIUS, ...
-              'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
+if strcmp(RB.kind,'car')
+    rob = bicycleKinematics('WheelBase',S.WHEELBASE, ...
+          'MaxSteeringAngle',S.MAX_STEER, ...
+          'VehicleInputs','VehicleSpeedSteeringAngle');
+else
+    rob = differentialDriveKinematics('WheelRadius',RB.wheel, ...
+          'TrackWidth',RB.track,'VehicleInputs','VehicleSpeedHeadingRate');
 end
 
 rng(params.seed,'twister');
-vmax  = params.speed * S.WHEEL_RADIUS;
-wmax  = 2*vmax / S.TRACK_WIDTH;
+vmax  = params.speed * RB.wheel;
+wmax  = 2*vmax / RB.track;
 goal  = [params.goal_x params.goal_y];
 pose  = [params.start_x; params.start_y; deg2rad(params.start_heading_deg)];
 
@@ -50,7 +46,7 @@ trail = pose(1:2)';
 every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
 if opts.Animate
     ax = opts.Axes; if isempty(ax), figure; ax = axes; end
-    [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose);
+    [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB);
 end
 
 while t < params.max_time
@@ -102,9 +98,9 @@ while t < params.max_time
     % Commanding a fast turn and a fast cruise at once would otherwise drive
     % the wheels past the limit the student set.  Only the differential drive
     % has per-wheel speeds to clamp.
-    if strcmp(params.robot,'DIFFERENTIAL_DRIVE')
-        wlSpin = (v - w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
-        wrSpin = (v + w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
+    if strcmp(RB.kind,'diff')
+        wlSpin = (v - w*RB.track/2) / RB.wheel;
+        wrSpin = (v + w*RB.track/2) / RB.wheel;
         mSpin  = max(abs(wlSpin), abs(wrSpin));
         if mSpin > params.speed
             kSpin = params.speed / mSpin;  v = v * kSpin;  w = w * kSpin;
@@ -112,7 +108,7 @@ while t < params.max_time
     end
 
     prev = pose(1:2);
-    if strcmp(params.robot,'CAR_LIKE')
+    if strcmp(RB.kind,'car')
         % A steered front wheel cannot deliver an arbitrary turn rate: convert
         % the desired rate into a steering angle and clip it to the limit.
         if v < 1e-9
@@ -129,19 +125,19 @@ while t < params.max_time
     pathLen = pathLen + norm(pose(1:2) - prev);
     trail(end+1,:) = pose(1:2)'; %#ok<AGROW>
 
-    c = i_clearance(S, items, pose(1), pose(2));
+    c = i_clearance(S, items, pose(1), pose(2), RB.radius);
     minClear = min(minClear, c);
     if c <= 0, collided = true; end
-    if max(abs(pose(1)), abs(pose(2))) > S.ARENA_HALF, leftArena = true; end
+    if max(abs(pose(1)), abs(pose(2))) + RB.radius > S.ARENA_HALF, leftArena = true; end
 
     if norm(pose(1:2)' - goal) <= S.GOAL_TOLERANCE, break; end
     if collided || leftArena, break; end
 
     if opts.Animate && mod(k,every)==0
         set(hTrail,'XData',trail(:,1),'YData',trail(:,2));
-        hRob.Position = [pose(1)-S.ROBOT_RADIUS, pose(2)-S.ROBOT_RADIUS, ...
-                         2*S.ROBOT_RADIUS, 2*S.ROBOT_RADIUS];
-        title(ax, sprintf('t = %5.2f s   clearance = %.3f m', t, c));
+        hRob.Position = [pose(1)-RB.radius, pose(2)-RB.radius, ...
+                         2*RB.radius, 2*RB.radius];
+        title(ax, sprintf('%s   t = %5.2f s   clearance = %.3f m', RB.label, t, c));
         drawnow                      % NOT limitrate: it drops the frames
         pause(0.01)                  % pace it so a screen recording reads
     end
@@ -188,22 +184,22 @@ end
 setOccupancy(map, [X(occ) Y(occ)], 1);
 end
 
-function c = i_clearance(S, items, px, py)
-c = S.ARENA_HALF - max(abs(px), abs(py)) - S.ROBOT_RADIUS;
+function c = i_clearance(S, items, px, py, rad)
+c = S.ARENA_HALF - max(abs(px), abs(py)) - rad;
 for i = 1:numel(items)
     it = items(i);
     if strcmp(it.type,'cyl')
-        d = hypot(px-it.x, py-it.y) - it.r - S.ROBOT_RADIUS;
+        d = hypot(px-it.x, py-it.y) - it.r - rad;
     else
         dx = max(abs(px-it.x) - it.sx/2, 0);
         dy = max(abs(py-it.y) - it.sy/2, 0);
-        d  = hypot(dx,dy) - S.ROBOT_RADIUS;
+        d  = hypot(dx,dy) - rad;
     end
     c = min(c, d);
 end
 end
 
-function [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose)
+function [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB)
 cla(ax); hold(ax,'on'); axis(ax,'equal');
 xlim(ax,[-1 1]); ylim(ax,[-1 1]); grid(ax,'on');
 rectangle(ax,'Position',[-S.ARENA_HALF -S.ARENA_HALF 2*S.ARENA_HALF 2*S.ARENA_HALF], ...
@@ -221,7 +217,7 @@ end
 plot(ax, goal(1), goal(2), 'p', 'MarkerSize',16, 'MarkerFaceColor',[.95 .75 .15], ...
     'MarkerEdgeColor','none');
 hTrail = plot(ax, pose(1), pose(2), '-', 'Color',[.15 .55 .85], 'LineWidth',1.5);
-r = S.ROBOT_RADIUS;
+r = RB.radius;
 hRob = rectangle(ax,'Position',[pose(1)-r pose(2)-r 2*r 2*r],'Curvature',[1 1], ...
     'FaceColor',[.85 .25 .2],'EdgeColor','none');
 xlabel(ax,'X [m]'); ylabel(ax,'Y [m]');

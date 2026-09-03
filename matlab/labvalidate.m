@@ -74,6 +74,24 @@ for i = 1:numel(S.parameters)
 end
 
 if isempty(errors)
+    % A position inside the documented range can still be illegal for a wide
+    % robot: the range is where the robot's CENTRE may be, and a Pioneer is
+    % 0.44 m across. Reject it by name rather than starting a run inside a wall.
+    rb  = S.robots(strcmp({S.robots.key}, params.robot));
+    lim = S.ARENA_HALF - rb.radius;
+    if max(abs([params.start_x params.start_y])) > lim
+        errors{end+1} = sprintf(['Start position puts a %s (%.2f m across) into the ' ...
+            'arena wall. For this robot the start must be within +/-%.2f m.'], ...
+            rb.label, 2*rb.radius, lim);
+    end
+    if max(abs([params.goal_x params.goal_y])) > lim
+        errors{end+1} = sprintf(['Goal position puts a %s (%.2f m across) into the ' ...
+            'arena wall. For this robot the goal must be within +/-%.2f m.'], ...
+            rb.label, 2*rb.radius, lim);
+    end
+end
+
+if isempty(errors)
     d = hypot(params.goal_x - params.start_x, params.goal_y - params.start_y);
     if d < S.GOAL_TOLERANCE
         errors{end+1} = sprintf(['Start and goal are %.3f m apart, which is inside ' ...
