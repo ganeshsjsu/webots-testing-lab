@@ -118,8 +118,18 @@ agree within tolerance. It takes about 90 seconds for all 49 cases.
 Push this repository to GitHub, register it at <https://webots.cloud>, and share
 
 ```
-https://webots.cloud/run?url=https://github.com/<user>/<repo>/blob/main/worlds/sw_testing_lab.wbt
+https://webots.cloud/run?version=R2025a&url=https://github.com/<user>/<repo>/blob/main/worlds/sw_testing_lab.wbt&type=demo
 ```
+
+Both `version` and `type=demo` are required: without `type` the webots.cloud
+router does not resolve `/run` to the simulation view at all.
+
+A run link is only as good as the simulation servers behind it. `/run` asks
+`webots.cloud/ajax/server/session.php` for a server, and when the public pool is
+empty that call answers *no simulation server available at the moment* for every
+world, including Cyberbotics' own demos. Check <https://webots.cloud/server>
+before a class; if the list is empty, the alternative is to register your own
+simulation server there.
 
 Do not treat that link as classroom-ready until you have worked through
 [docs/VALIDATION_CHECKLIST.md](docs/VALIDATION_CHECKLIST.md). A working local
