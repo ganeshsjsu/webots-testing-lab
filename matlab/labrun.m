@@ -20,7 +20,19 @@ H     = labhalf(params);
 items = lablayout(params);
 map   = i_buildmap(S, items, H);
 
-lidar = rangeSensor('Range',[0 S.SENSOR_RANGE], ...
+% Reaction distances scale with the robot, its speed and (for a steered
+% robot) its turning circle. A fixed 0.20 m trigger is meaningless for a
+% 0.80 m Husky: the obstacle is inside the body before it fires. The sensor
+% has to reach further than the trigger, so it scales too -- a large robot
+% carrying a longer-range sensor is what real platforms do.
+vmaxNom = params.speed * RB.wheel;
+if strcmp(RB.kind,'car'), turnR = RB.base / tan(S.MAX_STEER); else, turnR = 0; end
+ENTER      = RB.radius + 1.2*vmaxNom + 0.10 + 0.8*turnR;
+CLEAR_NEED = ENTER + 0.10;
+PASS_DIST  = 2*RB.radius + 0.15;          % distance past, not seconds
+sensorRange = max(S.SENSOR_RANGE, ENTER + 0.25);
+
+lidar = rangeSensor('Range',[0 sensorRange], ...
         'HorizontalAngle',[S.SENSOR_ANGLES(1) S.SENSOR_ANGLES(end)], ...
         'HorizontalAngleResolution', S.SENSOR_ANGLES(3)-S.SENSOR_ANGLES(2));
 if strcmp(RB.kind,'car')
@@ -40,8 +52,8 @@ pose  = [params.start_x; params.start_y; deg2rad(params.start_heading_deg)];
 
 dt = opts.Dt; t = 0; k = 0;
 minClear  = inf; collided = false; leftArena = false; pathLen = 0;
-state = 'SEEK'; avoidDir = 0; passLeft = 0;   % SEEK -> AVOID -> PASSBY
-ENTER = 0.20; CLEAR_NEED = 0.35; PASS_T = 2.0; TURN = 1.0; SLOW = 0.6;
+state = 'SEEK'; avoidDir = 0; travelled = 0;   % SEEK -> AVOID -> PASSBY
+TURN = 1.0; SLOW = 0.35;
 trail = pose(1:2)';
 
 every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
@@ -52,10 +64,10 @@ end
 
 while t < params.max_time
     r = lidar(pose', map);
-    r(isnan(r)) = S.SENSOR_RANGE;
+    r(isnan(r)) = sensorRange;
     if params.sensor_noise > 0
-        r = r + params.sensor_noise * S.SENSOR_RANGE * randn(size(r));
-        r = min(max(r,0), S.SENSOR_RANGE);
+        r = r + params.sensor_noise * sensorRange * randn(size(r));
+        r = min(max(r,0), sensorRange);
     end
     right = r(1); front = r(2); left = r(end);
 
@@ -70,18 +82,25 @@ while t < params.max_time
     % robot clip obstacles with all three beams reading clear, so once it
     % commits to going round it keeps going until it has driven past.
     nearest = min([front left right]);
-    if strcmp(state,'SEEK') && nearest < ENTER
+    goalDist = norm(pose(1:2)' - goal);
+
+    % Do not swerve for something further away than the destination. Without
+    % this a large robot avoids the arena wall behind its own goal and
+    % circles it forever, timing out with perfect clearance.
+    threat = nearest < ENTER && goalDist > nearest;
+
+    if strcmp(state,'SEEK') && threat
         state = 'AVOID';
         avoidDir = sign(left - right);
         if avoidDir == 0, avoidDir = 1; end
     end
-    if strcmp(state,'AVOID') && nearest > CLEAR_NEED
-        state = 'PASSBY'; passLeft = round(PASS_T/dt);
+    if strcmp(state,'AVOID') && (~threat || nearest > CLEAR_NEED)
+        state = 'PASSBY'; travelled = 0;
     end
     if strcmp(state,'PASSBY')
-        if nearest < ENTER
+        if threat
             state = 'AVOID';
-        elseif passLeft <= 0
+        elseif travelled >= PASS_DIST
             state = 'SEEK'; avoidDir = 0;
         end
     end
@@ -90,7 +109,7 @@ while t < params.max_time
         case 'AVOID'
             w = avoidDir * wmax * TURN;  v = vmax * SLOW;
         case 'PASSBY'
-            w = 0;                       v = vmax;  passLeft = passLeft - 1;
+            w = 0;                       v = vmax;
         otherwise
             w = max(min(3.0*bearing, wmax), -wmax);  v = vmax;
     end
@@ -123,7 +142,9 @@ while t < params.max_time
         pose = pose + derivative(rob, pose, [v w]) * dt;
     end
     t = t + dt; k = k + 1;
-    pathLen = pathLen + norm(pose(1:2) - prev);
+    stepLen = norm(pose(1:2) - prev);
+    pathLen = pathLen + stepLen;
+    if strcmp(state,'PASSBY'), travelled = travelled + stepLen; end
     trail(end+1,:) = pose(1:2)'; %#ok<AGROW>
 
     c = i_clearance(H, items, pose(1), pose(2), RB.radius);
