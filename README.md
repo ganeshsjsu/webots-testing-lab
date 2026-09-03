@@ -78,7 +78,8 @@ controllers/epuck_navigator/           the software under test
 controllers/test_supervisor/           the test oracle
   lab_spec.py                          parameters, ranges, scenarios, requirements
   test_supervisor.py                   configure / measure / judge, plus batch mode
-plugins/robot_windows/test_lab/        the browser UI
+plugins/robot_windows/test_lab/        the browser UI (with the two vendored
+                                       Webots robot-window JS files)
 tools/run_matrix.py                    headless batch runner and pre-class check
 tools/validation_matrix.json           the 49-case validation matrix
 tools/make_boundary_report.py          regenerates docs/MEASURED_BOUNDARIES.md
@@ -92,14 +93,18 @@ never disagree with the ranges the Supervisor enforces.
 
 ## Running it
 
-**In the Webots GUI**
+**In the Webots GUI** — this is the supported path for a class, and the one
+[docs/SETUP.md](docs/SETUP.md) documents step by step for students.
 
 ```bash
 webots worlds/sw_testing_lab.wbt
 ```
 
 Then open the Supervisor's robot window (right-click the `test_supervisor`
-robot in the scene tree → *Show Robot Window*, or double-click it).
+robot in the scene tree → *Show Robot Window*, or double-click it). The robot
+window has no network dependencies: the Webots `RobotWindow.js` API it needs is
+vendored into the project, so it works on a bad classroom network or none at
+all. See `plugins/robot_windows/test_lab/VENDORED.md`.
 
 **Headless, for verification or CI**
 
@@ -154,6 +159,9 @@ table of [docs/MEASURED_BOUNDARIES.md](docs/MEASURED_BOUNDARIES.md).
 
 ## Documentation
 
+- [docs/SETUP.md](docs/SETUP.md) — student setup: install Webots and Python,
+  open the world, and self-check with three runs whose results are known. Hand
+  this out with the assignment.
 - [docs/STUDENT_GUIDE.md](docs/STUDENT_GUIDE.md) — hand this to students.
 - [docs/INSTRUCTOR_GUIDE.md](docs/INSTRUCTOR_GUIDE.md) — design decisions, how to
   extend the lab, suggested assignments.

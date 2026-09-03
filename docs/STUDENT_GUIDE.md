@@ -1,5 +1,9 @@
 # Student guide
 
+**Set up the lab first.** [SETUP.md](SETUP.md) walks you through installing
+Webots and Python, opening the world, and running three test cases that confirm
+your setup works. Do that before reading on.
+
 You are testing a robot navigation controller. You will not read or change its
 code. Your job is to design test cases, run them, and report what you found —
 the same thing you would do against any black box with a written specification.
