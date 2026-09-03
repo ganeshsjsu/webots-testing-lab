@@ -20,8 +20,18 @@ map   = i_buildmap(S, items);
 lidar = rangeSensor('Range',[0 S.SENSOR_RANGE], ...
         'HorizontalAngle',[S.SENSOR_ANGLES(1) S.SENSOR_ANGLES(end)], ...
         'HorizontalAngleResolution', S.SENSOR_ANGLES(3)-S.SENSOR_ANGLES(2));
-rob   = differentialDriveKinematics('WheelRadius',S.WHEEL_RADIUS, ...
-        'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
+switch params.robot
+    case 'CAR_LIKE'
+        rob = bicycleKinematics('WheelBase',S.WHEELBASE, ...
+              'MaxSteeringAngle',S.MAX_STEER, ...
+              'VehicleInputs','VehicleSpeedSteeringAngle');
+    case 'UNICYCLE'
+        rob = unicycleKinematics('WheelRadius',S.WHEEL_RADIUS, ...
+              'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
+    otherwise
+        rob = differentialDriveKinematics('WheelRadius',S.WHEEL_RADIUS, ...
+              'TrackWidth',S.TRACK_WIDTH,'VehicleInputs','VehicleSpeedHeadingRate');
+end
 
 rng(params.seed,'twister');
 vmax  = params.speed * S.WHEEL_RADIUS;
@@ -88,16 +98,31 @@ while t < params.max_time
 
     % Respect the input under test: neither wheel may exceed `speed`.
     % Commanding a fast turn and a fast cruise at once would otherwise drive
-    % the wheels past the limit the student set.
-    wlSpin = (v - w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
-    wrSpin = (v + w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
-    mSpin  = max(abs(wlSpin), abs(wrSpin));
-    if mSpin > params.speed
-        kSpin = params.speed / mSpin;  v = v * kSpin;  w = w * kSpin;
+    % the wheels past the limit the student set.  Only the differential drive
+    % has per-wheel speeds to clamp.
+    if strcmp(params.robot,'DIFFERENTIAL_DRIVE')
+        wlSpin = (v - w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
+        wrSpin = (v + w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
+        mSpin  = max(abs(wlSpin), abs(wrSpin));
+        if mSpin > params.speed
+            kSpin = params.speed / mSpin;  v = v * kSpin;  w = w * kSpin;
+        end
     end
 
     prev = pose(1:2);
-    pose = pose + derivative(rob, pose, [v w]) * dt;
+    if strcmp(params.robot,'CAR_LIKE')
+        % A steered front wheel cannot deliver an arbitrary turn rate: convert
+        % the desired rate into a steering angle and clip it to the limit.
+        if v < 1e-9
+            steer = 0;
+        else
+            steer = atan(w * S.WHEELBASE / v);
+        end
+        steer = max(min(steer, S.MAX_STEER), -S.MAX_STEER);
+        pose = pose + derivative(rob, pose, [v steer]) * dt;
+    else
+        pose = pose + derivative(rob, pose, [v w]) * dt;
+    end
     t = t + dt; k = k + 1;
     pathLen = pathLen + norm(pose(1:2) - prev);
     trail(end+1,:) = pose(1:2)'; %#ok<AGROW>

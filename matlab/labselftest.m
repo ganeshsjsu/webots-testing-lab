@@ -22,5 +22,11 @@ end
 fprintf('---------------------------------------------------------\n');
 fprintf('Requirements loaded: %d.  Scenarios: %s.\n', size(S.requirements,1), ...
     strjoin({S.scenarios.key}, ', '));
+fprintf('Robots: %s.\n', strjoin({S.robots.key}, ', '));
+for rb = {S.robots.key}
+    q = labvalidate(struct('robot',rb{1}));
+    Rr = labrun(q);
+    fprintf('  %-20s %-4s  t=%6.2fs  clr=%.4fm\n', rb{1}, Rr.verdict, Rr.time, Rr.min_clearance);
+end
 fprintf('Run  labdemo  to watch one animate.\n\n');
 end
