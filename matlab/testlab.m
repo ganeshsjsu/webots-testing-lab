@@ -32,9 +32,11 @@ for i = 1:n
     if strcmp(p.kind,'enum')
         c = uidropdown(lg,'Items',p.choices,'Value',p.default);
     else
-        c = uieditfield(lg,'numeric','Value',p.default, ...
-            'Limits',[p.min p.max],'LowerLimitInclusive','on', ...
-            'UpperLimitInclusive','on');
+        % Deliberately NO 'Limits' here.  REQ-5 is one of the requirements
+        % under test, so the form must accept out-of-range input and let
+        % LABVALIDATE reject it with a message naming the parameter and the
+        % legal range.  A field that clamps silently makes REQ-5 untestable.
+        c = uieditfield(lg,'numeric','Value',p.default);
         lab.Text = sprintf('%s [%g..%g]', p.label, p.min, p.max);
     end
     c.Tooltip = p.help;
