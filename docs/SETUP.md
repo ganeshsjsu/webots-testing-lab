@@ -95,16 +95,17 @@ happens to every Mac user installing Webots.
 
 Then use whichever of these fits you.
 
-**If you have Homebrew** — one command, no dialog:
+**Homebrew is not an option.** `brew install --cask webots` fails:
 
 ```
-brew install --cask webots
+Error: webots: Cask 'webots' has been disabled because it does not pass
+the macOS Gatekeeper check! It was disabled on 2026-09-01.
 ```
 
-Homebrew verifies the file against a published checksum and installs it without
-the quarantine prompt. This is the easiest path by a distance.
+Homebrew removed the Webots cask for exactly the reason above. Do not spend
+time installing Homebrew hoping it will help — it will not.
 
-**Otherwise, allow it by hand:**
+**Allow it by hand:**
 
 1. Click **Done** on the dialog.
 2. Open **System Settings → Privacy & Security**.
@@ -128,9 +129,13 @@ It should print:
 484f6cc84ca794dd33e410b0bfc030132cc5b163a882c350c1d293d06d87584f
 ```
 
-That is the same checksum the Homebrew project publishes for this release, from
-a source independent of the download you just made. If yours differs, stop and
+That is the same checksum the Homebrew project records for this release, from a
+source independent of the download you just made. If yours differs, stop and
 tell your instructor — do not open it.
+
+Checking the checksum is worth the thirty seconds here. You are being asked to
+override a security warning, and "the instructions said to" is not a good reason
+to do that. Confirming the file is the exact one Cyberbotics published is.
 
 ### Everyone
 
