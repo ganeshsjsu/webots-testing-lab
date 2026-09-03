@@ -80,6 +80,60 @@ Scroll to **Assets** and take the file for your system:
 | Ubuntu / Debian | `webots_2025a_amd64.deb` — install with `sudo apt install ./webots_2025a_amd64.deb` |
 | Other Linux | `webots-R2025a-x86-64.tar.bz2` |
 
+### macOS: the "Apple could not verify" dialog
+
+When you open the `.dmg`, macOS will probably refuse it:
+
+> **"webots-R2025a.dmg" Not Opened.** Apple could not verify "webots-R2025a.dmg"
+> is free of malware that may harm your Mac or compromise your privacy.
+
+Read that carefully: it does not say anything was *found* in the file. Webots'
+installer is not notarised by Apple, so macOS declines to vouch for it. This
+happens to every Mac user installing Webots.
+
+**Click "Done". Never click "Move to Trash".**
+
+Then use whichever of these fits you.
+
+**If you have Homebrew** — one command, no dialog:
+
+```
+brew install --cask webots
+```
+
+Homebrew verifies the file against a published checksum and installs it without
+the quarantine prompt. This is the easiest path by a distance.
+
+**Otherwise, allow it by hand:**
+
+1. Click **Done** on the dialog.
+2. Open **System Settings → Privacy & Security**.
+3. Scroll down to **Security**. You will see a line naming
+   `webots-R2025a.dmg` and saying it was blocked.
+4. Click **Open Anyway** and authenticate.
+5. Open the `.dmg` again and confirm. Drag **Webots** into **Applications**.
+6. Launch Webots from Applications. You may get one more confirmation the
+   first time.
+
+**Want to check the file before you allow it?** Good instinct — that is exactly
+the habit this warning should produce. In Terminal:
+
+```
+shasum -a 256 ~/Downloads/webots-R2025a.dmg
+```
+
+It should print:
+
+```
+484f6cc84ca794dd33e410b0bfc030132cc5b163a882c350c1d293d06d87584f
+```
+
+That is the same checksum the Homebrew project publishes for this release, from
+a source independent of the download you just made. If yours differs, stop and
+tell your instructor — do not open it.
+
+### Everyone
+
 It must be **R2025a**. The lab's world file declares that version in its first
 line, and a different Webots will either refuse to open it or convert it and
 warn you. Do not take a build from the "nightly" releases.
