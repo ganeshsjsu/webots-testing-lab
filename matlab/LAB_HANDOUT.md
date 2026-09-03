@@ -11,25 +11,38 @@ Everything runs in your browser. There is nothing to install.
 
 ## 1. What you are testing
 
-A small robot must drive from a start position to a target position inside a
-2 m × 2 m arena without hitting anything. It carries:
+A robot must drive from a start position to a target position inside a square
+arena without hitting anything. It carries:
 
-- a three-beam range sensor looking forward and ±25°, range 0.5 m;
+- a three-beam range sensor looking forward and ±25°. **Its range depends on the
+  robot** — a bigger, faster platform carries a longer-range sensor, as real ones
+  do. The smallest robots see 0.5 m; the largest see about 1.9 m.
 - position and heading sensors.
 
 It has **no map**. It steers toward the goal and turns away from whatever the
 three beams happen to see. That is the entire design, and it is all you need in
 order to predict where it will struggle.
 
-You can choose between three robots. The navigation logic and the requirements
-are identical for all three — what changes is what the chassis can physically
-do:
+You choose the robot and the arena. The navigation logic, the sensor design and
+the requirements are identical for every robot — what changes is the machine:
 
-| Robot | Can it turn on the spot? |
-|---|---|
-| Differential drive (e-puck) | Yes — two independently driven wheels |
-| Unicycle | Yes — a simpler idealised model |
-| Car-like | **No** — steered front wheel, minimum turning radius about 0.21 m |
+| Robot | Width | Turns on the spot? |
+|---|---|---|
+| e-puck | 7 cm | yes |
+| TurtleBot3 Burger | 21 cm | yes |
+| TurtleBot3 Waffle | 31 cm | yes |
+| Pioneer 3-DX | 44 cm | yes |
+| Clearpath Jackal | 66 cm | yes |
+| Clearpath Husky | 80 cm | yes |
+| Car-like, small | 7 cm | **no** — steered front wheel |
+| Car-like, large | 44 cm | **no** — steered front wheel |
+
+The two car-like robots exist so you can separate *size* from *steering type*. If
+only one existed you could never tell which of the two caused a failure.
+
+The arena is square and you set its side length, from 1 m to 6 m. Every scenario
+scales with it, so a bigger arena is the same course with more room — except the
+corridor gap, which is an absolute width you set yourself.
 
 ## 2. The requirements
 
@@ -49,14 +62,15 @@ requirement using legal inputs **is**.
 
 | Input | Range |
 |---|---|
-| Robot | DIFFERENTIAL_DRIVE, UNICYCLE, CAR_LIKE |
+| Robot | eight platforms, see above |
+| Arena size | 1.0 … 6.0 m |
 | Scenario | OPEN_FIELD, SINGLE_OBSTACLE, CORRIDOR, DOGLEG, CLUTTER |
 | Wheel speed | 0.5 … 6.28 rad/s |
-| Start X, Start Y | −0.85 … 0.85 m |
+| Start X, Start Y | −3.0 … 3.0 m, **but must fit inside your arena with your robot** |
 | Start heading | −180 … 180° |
-| Goal X, Goal Y | −0.85 … 0.85 m |
+| Goal X, Goal Y | −3.0 … 3.0 m, same restriction |
 | Obstacle X, Y | −0.85 … 0.85 m (SINGLE_OBSTACLE only) |
-| Corridor width | 0.15 … 0.90 m (CORRIDOR only) |
+| Corridor width | 0.10 … 5.0 m (CORRIDOR only) |
 | Sensor noise | 0 … 0.5 |
 | Max execution time | 5 … 120 s |
 | Noise seed | 1 … 999999 |
@@ -108,44 +122,40 @@ Work through all five tasks. Record every run — the log does most of this for
 you, but the log cannot record *what you expected*, and that is the part that
 matters.
 
-**Task 1 — Equivalence partitioning on wheel speed.**
-Using OPEN_FIELD, the differential-drive robot and a 30 s limit, find the wheel
-speed at which the verdict changes from FAIL to PASS. Report the two adjacent
-values that gave different verdicts, and explain the failure in terms of a
-requirement. Then repeat with the car-like robot: does the boundary move? Say
-why or why not.
+**Task 1 — Equivalence partitioning, and what an input actually means.**
+In OPEN_FIELD, a 2 m arena and a 30 s limit, find the wheel speed at which the
+e-puck flips from FAIL to PASS. Then find the same boundary for the
+**Pioneer 3-DX**. The two numbers are very different. Explain why, given that
+both robots were sent the same input.
 
-**Task 2 — Boundary value analysis, and the robot matters.**
-Using CORRIDOR at 4.0 rad/s and a 60 s limit, find the narrowest gap the
-**differential-drive** robot gets through while satisfying *every* requirement.
-Then find the same number for the **car-like** robot. Report both, and explain
-the difference in terms of what the two chassis can do. Note that passing REQ-1
-while failing REQ-3 is a distinct outcome from failing both — say which you saw.
+**Task 2 — Boundary value analysis across robots.**
+Set the arena to 3.5 m so every robot fits, use CORRIDOR at 4.0 rad/s and a 60 s
+limit, and find the narrowest gap that passes **every** requirement for three
+robots of your choice — including at least one car-like one. Tabulate the
+results against the robots' widths. One robot gets through a gap narrower than
+its wider sibling needs; find it and explain it.
 
 **Task 3 — Input validation (REQ-5).**
-Find **three** different inputs the system should reject. Record the exact
-message each produced. At least one must be rejected for a reason other than
-being outside a numeric range.
+Find **four** inputs the system rejects, and record the exact message. At least
+one must be rejected because of a *combination* that is individually legal —
+each value inside its own documented range, but illegal together.
 
 **Task 4 — Reproducibility.**
-Set **Sensor noise to 0.2** first — with noise at 0 the seed has nothing to act
-on and this task will show you nothing. Then run the same case twice with the
-same seed, and again with only the seed changed. Report what stayed identical
-and what did not, and explain why a tester should care.
+Set **Sensor noise to 0.2** first; with noise at 0 the seed does nothing. Run the
+same case twice with the same seed, then again changing only the seed. Report
+what stayed identical and what did not, and why a tester should care.
 
-**Task 5 — Find the surprise.**
-With the differential-drive robot, there is at least one scenario where going
-*faster* passes a test that failed at a slower speed — the opposite of what most
-people assume about a robot near obstacles. Find one such pair, report both
-runs, and explain what it implies about testing one value of a parameter and
-assuming the rest behaves the same.
+**Task 5 — Find the smallest arena that works.**
+Pick a large robot and SINGLE_OBSTACLE. Find the smallest arena in which it can
+satisfy every requirement. Report how you searched, not just the answer — a
+linear scan and a binary search cost very different numbers of runs.
 
 **Task 6 — Find a test that can never pass.**
-There is a robot and scenario combination that fails at **every** legal wheel
-speed. Find it. Show enough runs to make the claim credible, and then answer
-this: is that a defect in the robot, or a requirement that is not achievable on
-that hardware? Justify your answer. There is a defensible case either way, and
-the reasoning is what is being marked.
+Find a robot and scenario that fail at **every** legal wheel speed, in any arena
+you are willing to try. Show enough runs to make the claim credible. Then answer:
+is that a defect in the robot, or a requirement that is not achievable on that
+hardware? Justify it. There is a defensible case either way and the reasoning is
+what is marked.
 
 ---
 

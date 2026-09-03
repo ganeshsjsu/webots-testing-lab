@@ -3,96 +3,94 @@
 Not for students. Measured by sweeping the parameter space. Verify a sample in
 `testlab` before grading, and re-measure if the controller changes.
 
-## Task 1 — wheel speed boundary (OPEN_FIELD, 30 s)
+## Reference table
 
-| Robot | Boundary |
-|---|---|
-| Differential drive | between **3.5** (FAIL) and **3.6** (PASS) |
-| Unicycle | between 3.5 and 3.6 — identical |
-| Car-like | between 3.5 and 3.6 — identical |
+Speed boundary: OPEN_FIELD, 2 m arena, 30 s limit.
+Corridor: narrowest gap passing every requirement, 4.0 rad/s, 3.5 m arena, 60 s.
+Min arena: smallest arena completing SINGLE_OBSTACLE at 5.5 rad/s, 120 s.
 
-The boundary is the same for all three, and that is the point of the second half
-of the task. In an empty arena nothing ever needs to turn sharply, so the
-chassis is irrelevant and the only limit is REQ-1 timing: below 3.6 rad/s the
-robot cannot cover the 2.26 m diagonal in 30 s. Mark whether they explain *why*
-it doesn't move, not just that it doesn't.
+| Robot | Width | Speed boundary | Corridor | Min arena |
+|---|---|---|---|---|
+| e-puck | 0.07 m | 3.0 → **3.1** | 0.24 m | 1.4 m |
+| TurtleBot3 Burger | 0.21 m | 1.8 → **1.9** | 0.48 m | 1.1 m |
+| TurtleBot3 Waffle | 0.31 m | 1.8 → **1.9** | 0.57 m | 2.8 m |
+| Pioneer 3-DX | 0.44 m | 0.6 → **0.7** | 0.74 m | 3.4 m |
+| Clearpath Jackal | 0.66 m | does not fit a 2 m arena | 1.05 m | 5.3 m |
+| Clearpath Husky | 0.80 m | does not fit a 2 m arena | 1.24 m | 5.6 m |
+| Car-like, small | 0.07 m | 3.0 → **3.1** | **0.17 m** | 1.0 m |
+| Car-like, large | 0.44 m | 0.6 → **0.7** | 0.88 m | 4.9 m |
 
-## Task 2 — corridor width (4.0 rad/s, 60 s)
+## Task 1 — why the speed boundary moves
 
-| Robot | Narrowest gap passing every requirement |
-|---|---|
-| Differential drive | **0.19 m** (clearance 0.033 m) |
-| Unicycle | 0.19 m (clearance 0.037 m) |
-| Car-like | **0.23 m** (clearance 0.035 m) |
+The boundary **falls** as robots get bigger: 3.1 rad/s for an e-puck, 0.7 for a
+Pioneer. Wheel speed is angular, so the ground speed is speed × wheel radius. The
+e-puck's wheels are 20.5 mm; the Pioneer's are 97.5 mm, nearly five times larger,
+so the same commanded number moves it nearly five times faster.
 
-The car-like robot needs roughly 4 cm more gap because it cannot line itself up
-on the spot — it has to approach the opening on an arc. Below each threshold the
-robot often still reaches the goal, so REQ-1 passes while REQ-3 fails; a student
-reporting only "it failed" has missed the distinction the task asks for.
+What to mark: whether they realise the *input* means something different on each
+robot, rather than concluding the Pioneer is "better". This is the point of the
+task — a test case is not portable just because the numbers transfer.
+
+## Task 2 — corridor width across robots
+
+Roughly proportional to width, with one deliberate exception: the **small
+car-like robot passes a 0.17 m gap where the e-puck needs 0.24 m**, despite
+being the same size. A differential robot approaching a narrow gap oscillates as
+avoidance and goal-seeking alternate, and that weaving costs clearance. The
+steered robot cannot weave, so it holds a straighter line through the gap.
+
+Being unable to turn sharply is usually a disadvantage and here it is an
+advantage. A student who finds this and explains it has understood something
+real. Accept any correct identification; the explanation is what earns the mark.
 
 ## Task 3 — input validation (REQ-5)
 
-Available rejections:
+Single-value rejections: speed outside [0.5, 6.28]; arena outside [1, 6];
+positions outside ±3.0; time outside [5, 120]; a fractional noise seed.
 
-- Wheel speed 99, or 0 — outside [0.5, 6.28]
-- Any position outside ±0.85; corridor width outside [0.15, 0.90]
-- Max execution time outside [5, 120]
-- **Noise seed 2.5** — must be a whole number (not a range violation)
-- **Start and goal within 0.10 m** — the run would pass before the robot moved
-  (not a range violation)
+Combination rejections — each value legal on its own, illegal together, which is
+what the task requires:
 
-The task requires one non-range rejection, so the answer must include the
-fractional seed or the start/goal proximity check.
+- A start or goal that fits the range but puts *that robot* through the wall of
+  *that arena* — e.g. Husky, 2 m arena, start (−0.7, −0.7)
+- A robot that cannot fit the arena at all — e.g. Husky in a 1 m arena
+- A corridor wider than the arena, leaving no barrier
+- Start and goal within 0.10 m of each other
 
 ## Task 4 — reproducibility
 
-With sensor noise above 0: the same seed reproduces the verdict and the
-measurements; changing the seed changes the trajectory and can flip the verdict
-near a boundary. With noise at 0 the seed does nothing, which is why the handout
-tells them to set it to 0.2.
+With noise above 0: same seed reproduces the verdict and the measurements;
+changing the seed changes the trajectory and can flip a verdict near a boundary.
+With noise at 0 the seed does nothing.
 
 **Unverified:** I have not measured how far a seed change moves a verdict near a
-boundary. Run two or three cases before relying on this for marking.
+boundary. Check two or three cases before relying on it for marking.
 
-## Task 5 — faster passes where slower fails
+## Task 5 — smallest workable arena
 
-Verdicts at 2.0 / 3.0 / 4.0 / 4.5 / 5.5 / 6.28 rad/s, 90 s limit:
+See the table. Mark the *method*: a linear scan from 1.0 m in 0.1 m steps is
+about 50 runs, a binary search is about 6. Both find the answer; only one shows
+they thought about cost, which is a real testing skill.
 
-| Robot | SINGLE_OBSTACLE | DOGLEG | CLUTTER |
-|---|---|---|---|
-| Differential | F F F F **P P** | F F F **P P P** | P P P P P P |
-| Unicycle | F F F **P P P** | F F **P P P P** | P P P P P P |
-| Car-like | F F F F F F | F F F F F F | F **P P P P P** |
-
-Any row containing a FAIL followed by a PASS answers the task. The cause is
-real: after avoiding, the controller drives straight for a fixed **2 seconds**
-before resuming goal-seeking, so a slow robot covers less ground in that window
-and clips the obstacle it was avoiding. A time-based rule where a distance-based
-one was needed — a genuine design defect, and good material for discussion.
-
-CLUTTER on the differential and unicycle robots passes at every speed, so it
-cannot answer this task. Redirect anyone who picks it.
+**One anomaly, unexplained.** The TurtleBot3 Burger manages a 1.1 m arena while
+the smaller e-puck needs 1.4 m. I have not worked out why, and I am recording it
+rather than hiding it. Do not mark students down for reporting it, and treat any
+plausible investigation of it as a good answer.
 
 ## Task 6 — a test that can never pass
 
-**Car-like + SINGLE_OBSTACLE** and **car-like + DOGLEG** fail at every legal
-wheel speed. Both are correct answers.
+Reliable answers: **car-like large** fails SINGLE_OBSTACLE and DOGLEG at every
+speed in small arenas, and every robot except the e-puck and the small car fails
+DOGLEG in a 2 m arena. Any pair backed by runs is acceptable.
 
-Cause: with a 0.21 m minimum turning radius the robot cannot get around a
-0.15 m cylinder while keeping 0.03 m clearance, given only 0.5 m of forward
-vision to react with. It is not a timing problem, so raising the limit does not
-help — worth checking whether the student tried that.
+Both readings are defensible and either earns full marks:
 
-Both conclusions are defensible and either can earn full marks:
+- **A defect** — the controller is purely reactive with no memory, so in a
+  dogleg it grinds along a barrier instead of backing out. A planner would solve
+  it, so the robot could meet the requirement.
+- **An infeasible requirement** — REQ-3's clearance cannot be held by a chassis
+  of that width with that turning circle in an arena that size, so the
+  requirement should be stated per robot rather than absolutely.
 
-- **A defect** — the controller was designed around a chassis that can pivot,
-  and was never adapted for one that cannot. The requirement is achievable with
-  better control (a planner, or reacting earlier).
-- **An infeasible requirement** — REQ-3 asks for clearance this chassis cannot
-  hold with this sensor range at this obstacle size, so the requirement should
-  be qualified per robot rather than stated absolutely.
-
-What earns the marks is whether they distinguish *the robot cannot do this* from
-*this controller does not do this*, and whether they cite runs rather than
-assert. A student who says "the requirement should say which robots it applies
-to" has understood something worth understanding.
+What earns marks is distinguishing *the robot cannot do this* from *this
+controller does not do this*, and citing runs rather than asserting.
