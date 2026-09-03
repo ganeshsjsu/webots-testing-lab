@@ -83,7 +83,7 @@ tools/run_matrix.py                    headless batch runner and pre-class check
 tools/validation_matrix.json           the 49-case validation matrix
 tools/make_boundary_report.py          regenerates docs/MEASURED_BOUNDARIES.md
 docs/                                  student guide, instructor guide, checklist
-webots.yaml, Dockerfile                webots.cloud publication descriptors
+webots.yaml                            webots.cloud publication descriptor
 ```
 
 `lab_spec.py` is the single source of truth. The Robot Window builds its form
@@ -129,8 +129,9 @@ class-sized group; that is the one thing this repository cannot verify for you.
 ## Version pinning
 
 Authored and verified against **Webots R2025a**. The world header
-(`#VRML_SIM R2025a utf8`), the `RobotWindow.js` import in the Robot Window, and
-the `Dockerfile` tag all name that version. Change all three together.
+(`#VRML_SIM R2025a utf8`) and the `RobotWindow.js` import in the Robot Window
+both name that version; change them together. There is intentionally no
+`Dockerfile` — see [docs/DOCKER_IMAGE.md](docs/DOCKER_IMAGE.md).
 
 ## Reproducibility
 

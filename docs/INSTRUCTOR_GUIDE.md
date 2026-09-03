@@ -154,6 +154,7 @@ want them later, the clean place is a variant of `epuck_navigator.py` selected b
 ## Known limitations
 
 - Webots.cloud concurrency at class scale is unverified; see the checklist.
+- The project ships without a `Dockerfile` on purpose; see `docs/DOCKER_IMAGE.md`.
 - Continuous measurements are reproducible to a fraction of a millimetre rather
   than bit-exactly. Verdicts and discrete outcomes are exact. A long chaotic
   trajectory plus a physics engine that is not bit-exact across a session makes
