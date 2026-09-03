@@ -7,6 +7,7 @@ stamp = num2str(round(posixtime(datetime('now'))));
 for i = 1:numel(files)
     websave(files{i}, [base files{i} '?v=' stamp]);
 end
+clear functions      %#ok<CLFUNC>  evict stale copies: rehash alone will not
 rehash
 fprintf('Updated %d files from GitHub.\n', numel(files));
 labselftest
