@@ -16,14 +16,15 @@ end
 S     = labspec();
 RB    = S.robots(strcmp({S.robots.key}, params.robot));
 if isempty(RB), error('labrun:robot','Unknown robot ''%s''.', params.robot); end
+H     = labhalf(params);
 items = lablayout(params);
-map   = i_buildmap(S, items);
+map   = i_buildmap(S, items, H);
 
 lidar = rangeSensor('Range',[0 S.SENSOR_RANGE], ...
         'HorizontalAngle',[S.SENSOR_ANGLES(1) S.SENSOR_ANGLES(end)], ...
         'HorizontalAngleResolution', S.SENSOR_ANGLES(3)-S.SENSOR_ANGLES(2));
 if strcmp(RB.kind,'car')
-    rob = bicycleKinematics('WheelBase',S.WHEELBASE, ...
+    rob = bicycleKinematics('WheelBase',RB.base, ...
           'MaxSteeringAngle',S.MAX_STEER, ...
           'VehicleInputs','VehicleSpeedSteeringAngle');
 else
@@ -46,7 +47,7 @@ trail = pose(1:2)';
 every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
 if opts.Animate
     ax = opts.Axes; if isempty(ax), figure; ax = axes; end
-    [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB);
+    [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB, H);
 end
 
 while t < params.max_time
@@ -114,7 +115,7 @@ while t < params.max_time
         if v < 1e-9
             steer = 0;
         else
-            steer = atan(w * S.WHEELBASE / v);
+            steer = atan(w * RB.base / v);
         end
         steer = max(min(steer, S.MAX_STEER), -S.MAX_STEER);
         pose = pose + derivative(rob, pose, [v steer]) * dt;
@@ -125,10 +126,10 @@ while t < params.max_time
     pathLen = pathLen + norm(pose(1:2) - prev);
     trail(end+1,:) = pose(1:2)'; %#ok<AGROW>
 
-    c = i_clearance(S, items, pose(1), pose(2), RB.radius);
+    c = i_clearance(H, items, pose(1), pose(2), RB.radius);
     minClear = min(minClear, c);
     if c <= 0, collided = true; end
-    if max(abs(pose(1)), abs(pose(2))) + RB.radius > S.ARENA_HALF, leftArena = true; end
+    if max(abs(pose(1)), abs(pose(2))) + RB.radius > H, leftArena = true; end
 
     if norm(pose(1:2)' - goal) <= S.GOAL_TOLERANCE, break; end
     if collided || leftArena, break; end
@@ -166,13 +167,14 @@ R = struct('verdict', i_yn(passed,'PASS','FAIL'), 'reason', strjoin(reasons,', '
     'trail', trail, 'params', params);
 end
 
-function map = i_buildmap(S, items)
-res = 100;
-map = binaryOccupancyMap(2, 2, res);
-map.GridLocationInWorld = [-1 -1];
-g = -1 : 1/res : 1;
+function map = i_buildmap(S, items, H) %#ok<INUSL>
+side = 2*(H + 0.01);
+res  = max(40, min(100, round(200/side)));   % keep the grid affordable when big
+map  = binaryOccupancyMap(side, side, res);
+map.GridLocationInWorld = [-side/2 -side/2];
+g = -side/2 : 1/res : side/2;
 [X,Y] = meshgrid(g, g);
-occ = abs(X) > S.ARENA_HALF | abs(Y) > S.ARENA_HALF;
+occ = abs(X) > H | abs(Y) > H;
 for i = 1:numel(items)
     it = items(i);
     if strcmp(it.type,'cyl')
@@ -184,8 +186,8 @@ end
 setOccupancy(map, [X(occ) Y(occ)], 1);
 end
 
-function c = i_clearance(S, items, px, py, rad)
-c = S.ARENA_HALF - max(abs(px), abs(py)) - rad;
+function c = i_clearance(H, items, px, py, rad)
+c = H - max(abs(px), abs(py)) - rad;
 for i = 1:numel(items)
     it = items(i);
     if strcmp(it.type,'cyl')
@@ -199,10 +201,10 @@ for i = 1:numel(items)
 end
 end
 
-function [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB)
+function [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose, RB, H)
 cla(ax); hold(ax,'on'); axis(ax,'equal');
-xlim(ax,[-1 1]); ylim(ax,[-1 1]); grid(ax,'on');
-rectangle(ax,'Position',[-S.ARENA_HALF -S.ARENA_HALF 2*S.ARENA_HALF 2*S.ARENA_HALF], ...
+lim = H + 0.05; xlim(ax,[-lim lim]); ylim(ax,[-lim lim]); grid(ax,'on');
+rectangle(ax,'Position',[-H -H 2*H 2*H], ...
     'EdgeColor',[.4 .4 .4],'LineWidth',2);
 for i = 1:numel(items)
     it = items(i);

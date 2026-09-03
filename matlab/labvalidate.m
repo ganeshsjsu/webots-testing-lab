@@ -78,16 +78,27 @@ if isempty(errors)
     % robot: the range is where the robot's CENTRE may be, and a Pioneer is
     % 0.44 m across. Reject it by name rather than starting a run inside a wall.
     rb  = S.robots(strcmp({S.robots.key}, params.robot));
-    lim = S.ARENA_HALF - rb.radius;
-    if max(abs([params.start_x params.start_y])) > lim
-        errors{end+1} = sprintf(['Start position puts a %s (%.2f m across) into the ' ...
-            'arena wall. For this robot the start must be within +/-%.2f m.'], ...
-            rb.label, 2*rb.radius, lim);
+    H   = labhalf(params);
+    lim = H - rb.radius;
+    if lim <= 0
+        errors{end+1} = sprintf(['A %s is %.2f m across and will not fit inside a ' ...
+            '%.1f m arena at all. Choose a smaller robot or a bigger arena.'], ...
+            rb.label, 2*rb.radius, params.arena_size);
+    else
+        if max(abs([params.start_x params.start_y])) > lim
+            errors{end+1} = sprintf(['Start position puts a %s (%.2f m across) into the ' ...
+                'wall of a %.1f m arena. Keep the start within +/-%.2f m, or enlarge ' ...
+                'the arena.'], rb.label, 2*rb.radius, params.arena_size, lim);
+        end
+        if max(abs([params.goal_x params.goal_y])) > lim
+            errors{end+1} = sprintf(['Goal position puts a %s (%.2f m across) into the ' ...
+                'wall of a %.1f m arena. Keep the goal within +/-%.2f m, or enlarge ' ...
+                'the arena.'], rb.label, 2*rb.radius, params.arena_size, lim);
+        end
     end
-    if max(abs([params.goal_x params.goal_y])) > lim
-        errors{end+1} = sprintf(['Goal position puts a %s (%.2f m across) into the ' ...
-            'arena wall. For this robot the goal must be within +/-%.2f m.'], ...
-            rb.label, 2*rb.radius, lim);
+    if strcmp(params.scenario,'CORRIDOR') && params.corridor_width >= 2*H
+        errors{end+1} = sprintf(['Corridor width %.2f m is wider than the %.1f m arena, ' ...
+            'so there would be no barrier at all.'], params.corridor_width, params.arena_size);
     end
 end
 
