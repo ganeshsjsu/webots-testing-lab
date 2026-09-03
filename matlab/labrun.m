@@ -33,6 +33,7 @@ dt = opts.Dt; t = 0; k = 0;
 minClear  = inf; collided = false; leftArena = false; pathLen = 0;
 trail = pose(1:2)';
 
+every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
 if opts.Animate
     ax = opts.Axes; if isempty(ax), figure; ax = axes; end
     [hTrail,hRob] = i_setupplot(ax, S, items, goal, pose);
@@ -71,11 +72,13 @@ while t < params.max_time
     if norm(pose(1:2)' - goal) <= S.GOAL_TOLERANCE, break; end
     if collided || leftArena, break; end
 
-    if opts.Animate && mod(k,5)==0
+    if opts.Animate && mod(k,every)==0
         set(hTrail,'XData',trail(:,1),'YData',trail(:,2));
-        set(hRob,'XData',pose(1),'YData',pose(2));
+        hRob.Position = [pose(1)-S.ROBOT_RADIUS, pose(2)-S.ROBOT_RADIUS, ...
+                         2*S.ROBOT_RADIUS, 2*S.ROBOT_RADIUS];
         title(ax, sprintf('t = %5.2f s   clearance = %.3f m', t, c));
-        drawnow limitrate
+        drawnow                      % NOT limitrate: it drops the frames
+        pause(0.01)                  % pace it so a screen recording reads
     end
 end
 
@@ -153,8 +156,9 @@ end
 plot(ax, goal(1), goal(2), 'p', 'MarkerSize',16, 'MarkerFaceColor',[.95 .75 .15], ...
     'MarkerEdgeColor','none');
 hTrail = plot(ax, pose(1), pose(2), '-', 'Color',[.15 .55 .85], 'LineWidth',1.5);
-hRob   = plot(ax, pose(1), pose(2), 'o', 'MarkerSize',9, ...
-    'MarkerFaceColor',[.85 .25 .2], 'MarkerEdgeColor','none');
+r = S.ROBOT_RADIUS;
+hRob = rectangle(ax,'Position',[pose(1)-r pose(2)-r 2*r 2*r],'Curvature',[1 1], ...
+    'FaceColor',[.85 .25 .2],'EdgeColor','none');
 xlabel(ax,'X [m]'); ylabel(ax,'Y [m]');
 end
 
