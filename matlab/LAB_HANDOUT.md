@@ -11,8 +11,8 @@ Everything runs in your browser. There is nothing to install.
 
 ## 1. What you are testing
 
-A small two-wheeled robot must drive from a start position to a target position
-inside a 2 m × 2 m arena without hitting anything. It carries:
+A small robot must drive from a start position to a target position inside a
+2 m × 2 m arena without hitting anything. It carries:
 
 - a three-beam range sensor looking forward and ±25°, range 0.5 m;
 - position and heading sensors.
@@ -20,6 +20,16 @@ inside a 2 m × 2 m arena without hitting anything. It carries:
 It has **no map**. It steers toward the goal and turns away from whatever the
 three beams happen to see. That is the entire design, and it is all you need in
 order to predict where it will struggle.
+
+You can choose between three robots. The navigation logic and the requirements
+are identical for all three — what changes is what the chassis can physically
+do:
+
+| Robot | Can it turn on the spot? |
+|---|---|
+| Differential drive (e-puck) | Yes — two independently driven wheels |
+| Unicycle | Yes — a simpler idealised model |
+| Car-like | **No** — steered front wheel, minimum turning radius about 0.21 m |
 
 ## 2. The requirements
 
@@ -39,6 +49,7 @@ requirement using legal inputs **is**.
 
 | Input | Range |
 |---|---|
+| Robot | DIFFERENTIAL_DRIVE, UNICYCLE, CAR_LIKE |
 | Scenario | OPEN_FIELD, SINGLE_OBSTACLE, CORRIDOR, DOGLEG, CLUTTER |
 | Wheel speed | 0.5 … 6.28 rad/s |
 | Start X, Start Y | −0.85 … 0.85 m |
@@ -98,15 +109,18 @@ you, but the log cannot record *what you expected*, and that is the part that
 matters.
 
 **Task 1 — Equivalence partitioning on wheel speed.**
-Using OPEN_FIELD and a 30 s limit, find the wheel speed at which the verdict
-changes from FAIL to PASS. Report the two adjacent values you tested that gave
-different verdicts, and explain the failure in terms of a requirement.
+Using OPEN_FIELD, the differential-drive robot and a 30 s limit, find the wheel
+speed at which the verdict changes from FAIL to PASS. Report the two adjacent
+values that gave different verdicts, and explain the failure in terms of a
+requirement. Then repeat with the car-like robot: does the boundary move? Say
+why or why not.
 
-**Task 2 — Boundary value analysis on corridor width.**
-Using CORRIDOR at 4.0 rad/s and a 60 s limit, find the narrowest gap the robot
-gets through while still satisfying **every** requirement. Note that passing
-REQ-1 and failing REQ-3 is a distinct outcome from failing both — say which you
-observed and why.
+**Task 2 — Boundary value analysis, and the robot matters.**
+Using CORRIDOR at 4.0 rad/s and a 60 s limit, find the narrowest gap the
+**differential-drive** robot gets through while satisfying *every* requirement.
+Then find the same number for the **car-like** robot. Report both, and explain
+the difference in terms of what the two chassis can do. Note that passing REQ-1
+while failing REQ-3 is a distinct outcome from failing both — say which you saw.
 
 **Task 3 — Input validation (REQ-5).**
 Find **three** different inputs the system should reject. Record the exact
@@ -120,10 +134,18 @@ same seed, and again with only the seed changed. Report what stayed identical
 and what did not, and explain why a tester should care.
 
 **Task 5 — Find the surprise.**
-In at least one scenario, going *faster* makes a test pass that failed at a
-slower speed — the opposite of what most people assume about a robot near
-obstacles. Find one such pair, report both runs, and explain what it implies
-about testing one value of a parameter and assuming the rest behaves the same.
+With the differential-drive robot, there is at least one scenario where going
+*faster* passes a test that failed at a slower speed — the opposite of what most
+people assume about a robot near obstacles. Find one such pair, report both
+runs, and explain what it implies about testing one value of a parameter and
+assuming the rest behaves the same.
+
+**Task 6 — Find a test that can never pass.**
+There is a robot and scenario combination that fails at **every** legal wheel
+speed. Find it. Show enough runs to make the claim credible, and then answer
+this: is that a defect in the robot, or a requirement that is not achievable on
+that hardware? Justify your answer. There is a defensible case either way, and
+the reasoning is what is being marked.
 
 ---
 
