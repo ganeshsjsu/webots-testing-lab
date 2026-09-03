@@ -31,7 +31,8 @@ pose  = [params.start_x; params.start_y; deg2rad(params.start_heading_deg)];
 
 dt = opts.Dt; t = 0; k = 0;
 minClear  = inf; collided = false; leftArena = false; pathLen = 0;
-avoiding = false; avoidDir = 0;      % latched avoidance state
+state = 'SEEK'; avoidDir = 0; passLeft = 0;   % SEEK -> AVOID -> PASSBY
+ENTER = 0.20; CLEAR_NEED = 0.35; PASS_T = 2.0; TURN = 1.0; SLOW = 0.6;
 trail = pose(1:2)';
 
 every = max(1, round(0.05/dt));     % redraw about every 50 ms of sim time
@@ -52,24 +53,47 @@ while t < params.max_time
     bearing = atan2(goal(2)-pose(2), goal(1)-pose(1)) - pose(3);
     bearing = atan2(sin(bearing), cos(bearing));
 
-    % Reactive avoidance with hysteresis and a latched turn direction.
-    % Without the latch this oscillates: it turns away, the obstacle leaves
-    % the trigger window, goal-seeking snaps it back, and the two cancel
-    % into a straight line through the obstacle.
+    % Reactive avoidance as a three-state machine.
+    %
+    % The sensor is three rays at 0 and +/-25 degrees, so an obstacle the
+    % robot is sliding past leaves the cone while still being close enough
+    % to hit the body.  Reacting only to what is currently visible makes the
+    % robot clip obstacles with all three beams reading clear, so once it
+    % commits to going round it keeps going until it has driven past.
     nearest = min([front left right]);
-    if nearest < 0.20, avoiding = true; end
-    if avoiding && nearest > 0.28, avoiding = false; avoidDir = 0; end
-
-    if avoiding
-        if avoidDir == 0
-            avoidDir = sign(left - right);        % commit to the freer side
-            if avoidDir == 0, avoidDir = 1; end
+    if strcmp(state,'SEEK') && nearest < ENTER
+        state = 'AVOID';
+        avoidDir = sign(left - right);
+        if avoidDir == 0, avoidDir = 1; end
+    end
+    if strcmp(state,'AVOID') && nearest > CLEAR_NEED
+        state = 'PASSBY'; passLeft = round(PASS_T/dt);
+    end
+    if strcmp(state,'PASSBY')
+        if nearest < ENTER
+            state = 'AVOID';
+        elseif passLeft <= 0
+            state = 'SEEK'; avoidDir = 0;
         end
-        w = avoidDir * wmax * 0.7;
-        v = vmax * 0.6;
-    else
-        w = max(min(3.0*bearing, wmax), -wmax);
-        v = vmax;
+    end
+
+    switch state
+        case 'AVOID'
+            w = avoidDir * wmax * TURN;  v = vmax * SLOW;
+        case 'PASSBY'
+            w = 0;                       v = vmax;  passLeft = passLeft - 1;
+        otherwise
+            w = max(min(3.0*bearing, wmax), -wmax);  v = vmax;
+    end
+
+    % Respect the input under test: neither wheel may exceed `speed`.
+    % Commanding a fast turn and a fast cruise at once would otherwise drive
+    % the wheels past the limit the student set.
+    wlSpin = (v - w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
+    wrSpin = (v + w*S.TRACK_WIDTH/2) / S.WHEEL_RADIUS;
+    mSpin  = max(abs(wlSpin), abs(wrSpin));
+    if mSpin > params.speed
+        kSpin = params.speed / mSpin;  v = v * kSpin;  w = w * kSpin;
     end
 
     prev = pose(1:2);
