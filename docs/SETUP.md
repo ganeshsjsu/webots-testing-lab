@@ -14,6 +14,25 @@ uses only the Python standard library.
 | Free disk space | About 2 GB |
 | Permission to install an application | On a locked-down machine, see [If you cannot install software](#if-you-cannot-install-software) |
 
+## Will this run on your laptop?
+
+Check this before you download anything. These are Webots R2025a's own stated
+requirements, and the graphics one catches people out.
+
+| | |
+|---|---|
+| **Windows** | 10 or 11, 64-bit |
+| **macOS** | 12 Monterey, 13 Ventura and 14 Sonoma are officially supported. Newer macOS usually works, but Cyberbotics does not commit to it — if you hit something strange on a recent macOS, say so early rather than assuming you did it wrong |
+| **Linux** | Ubuntu 22.04 or 24.04, x86-64 |
+| **Graphics** | An OpenGL 3.3-capable NVIDIA or AMD adapter. Cyberbotics **does not recommend Intel integrated graphics**, which can cause 3D rendering problems or crashes; updating the Intel graphics driver sometimes fixes it, but there is no guarantee. Apple's built-in graphics are fine on any fairly recent Mac |
+| **CPU / RAM** | 2 GHz dual core and 2 GB minimum; quad core recommended |
+
+If your machine falls outside any of these, **tell your instructor in the first
+week**, not the night before the assignment is due. A lab machine is a normal
+answer.
+
+---
+
 Do the steps in order. Step 1 comes before step 2 on purpose: Webots looks for
 Python when it starts a controller, and installing Python first avoids the most
 common failure in this whole document.

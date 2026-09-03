@@ -42,6 +42,8 @@ desktop Webots since the change. Check it before anything else.
 | L3 | The three self-check runs give the documented results **in the GUI** | The expected values in SETUP.md step 7 were measured headlessly. Confirm the GUI agrees, in particular the ≈ 19.7 s completion time; loosen the wording in SETUP.md if it drifts. |
 | L4 | The Python-command fix is sufficient on a clean macOS | Webots defaults to `python`, which most Macs do not have. Confirm that setting **Python command** to `python3` is enough, and record the absolute path that works if it is not. |
 | L5 | The ZIP download path works, not just a `git clone` | Download the ZIP from GitHub, unzip, open the world from the `webots-testing-lab-main` folder. Relative controller and robot-window paths must still resolve. |
+| L7 | Nothing here has ever been run in the **desktop** Webots GUI | V1-V10 were all established headlessly on Ubuntu, and V3 exercised the robot window in a headless browser rather than in Webots itself. The desktop path is now the supported one for students, so it needs its own first run. L1 is the narrow version of this; this row is the whole of it. |
+| L8 | The class's actual hardware can run Webots | R2025a supports macOS 12-14 officially and says nothing about newer; it advises against Intel integrated graphics. Survey the class early — one question about laptop model and OS version — rather than discovering the distribution during the lab session. |
 | L6 | A student can get from nothing to a passing run inside the stated budget | Time one student who has never seen it. SETUP.md claims 30 minutes; if it takes 90, say 90. |
 
 ## You must verify — the webots.cloud path
